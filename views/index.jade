@@ -1,5 +1,77 @@
 extends layout
 block content
 	div#wrapper
-		nav.navbar.navbar-inverse.navbar-fixed-top
+		// 导航
+		nav.navbar.navbar-inverse.navbar-fixed-top(role='navigation')
+			// logo
+			div.navbar-header
+				button.navbar-toggle(data-toggle="collapse" data-target=".navbar-ex1-collapse")
+					span Toggle navigation
+				a.navbar-brand(href="index.html") Admin
+			// 右上部菜单
+			ul.nav.navbar-right.top-nav
+				li.dropdown
+					a.dropdown-toggle(href="#",data-toggle="dropdown")
+						i.fa.fa-user 
+						|  John Smith 
+						b.caret
+					ul.dropdown-menu
+						li
+							a(href="#")
+								i.fa.fa-fw.fa-user Profile
+						li
+							a(href="#")
+								l.fa.fa-fw.fa-envelope Inbox
+			// 主菜单
+			div.collapse.navbar-collapse.navbar-ex1-collapse
+				uib-accordion(close-others="true",template-url="accordion-template.html")
+					uib-accordion-group(template-url="group-template.html")
+						uib-accordion-heading
+							i.fa.fa-fw.fa-arrows-v 
+							| My Test
+							i.fa.fa-fw.fa-caret-down
+						li
+							a(ng-href="#/booking-list") 订单列表
+						li
+							a(ng-href="#/") 我的询价
+					uib-accordion-group(template-url="group-template.html",panel-class="#/tables")
+						uib-accordion-heading
+							i.fa.fa-fw.fa-table
+							|  Tables
+					uib-accordion-group(template-url="group-template.html",panel-class="#/charts")
+						uib-accordion-heading
+							i.fa.fa-fw.fa-bar-chart-o
+							|  Charts
 
+		// 主页面
+		div#page-wrapper
+			div.container-fluid(ng-view)
+	script(id='accordion-template.html', type="text/ng-template")
+		ul.nav.navbar-nav.side-nav(ng-transclude)
+	script(id="group-template.html", type="text/ng-template")
+		li
+			a(ng-href="{{panelClass === 'panel-default' ? '' : panelClass}}" tabindex="0" ng-click="toggleOpen()" uib-accordion-transclude="heading")
+				uib-accordion-header
+			ul.panel-collapse.collapse(uib-collapse="!isOpen" ng-transclude)
+
+	// 引入第三方库
+	script(src="jslib/jquery.js")
+	script(src="jslib/angular.js")
+	script(src="jslib/angular-route.js")
+	script(src="jslib/ui-bootstrap-tpls-1.3.3.js")
+
+	// 引入依赖的module
+	script(src="js/dataservice/ServiceTest.js")
+	script(src="js/dataservice/DataService.js")
+	script(src="js/dataservice/SharedService.js")
+
+	// 主模块的定义
+	script(src="js/app.js")
+
+	// 页面中使用的指令
+	script(src="js/ui/UIDirective.js")
+
+	// 模块脚本
+	script(src="js/controllers/booking-list.js")
+	script(src="js/controllers/tables.js")
+	script(src="js/controllers/charts.js")

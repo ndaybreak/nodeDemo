@@ -1,18 +1,19 @@
 var app = angular.module('myApp', [ 'ngRoute', 'ui.bootstrap','DataServiceModule', 'SharedServiceModule' ]);
 
 app.config([ '$routeProvider', function($routeProvider) {
+	var baseUrl = 'myapp/template/'
 	$routeProvider
 		.when('/', {
-			templateUrl : 'booking-list.html',
+			templateUrl : baseUrl + 'booking-list',
 			controller : bookingListCtrl})
 		.when('/booking-list', {
-				templateUrl : 'booking-list.html',
+				templateUrl : baseUrl + 'booking-list',
 				controller : bookingListCtrl})
 		.when('/tables', {
-			templateUrl : 'tables.html',
+			templateUrl : baseUrl + 'tables',
 			controller : tablesCtrl})
 		.when('/charts', {
-			templateUrl : 'charts.html',
+			templateUrl : baseUrl + 'charts',
 			controller : chartsCtrl})
 		.otherwise({
 			redirectTo : '/'
