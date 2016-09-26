@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var tests = require('./routes/test');
+var css = require('./routes/css');
 
 var app = express();
 
@@ -28,8 +29,9 @@ app.get('/myapp/template/:templateId', function (req, res) {
     res.render(req.params.templateId, {})
 })
 
-app.use('/myapp', routes);
-app.use('/test', tests);
+app.use('/myapp', routes); // angular
+app.use('/test', tests);   // testing
+app.use('/css', css);      // test css
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
