@@ -1,0 +1,22 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.row:after {
+    clear: both;
+    content: '';
+    display: table;
+}
+.hide {
+    display: none;
+}
+/***************** tooltip *****************/
+
+
+
+/***************** / tooltip *****************/
+
+

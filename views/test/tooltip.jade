@@ -1,0 +1,78 @@
+extends layout
+block content
+    style.
+        .tooltip-head {
+            height: 50px;
+            line-height: 50px;
+            background-color: black;
+            color: white;
+        }
+        .tooltip-log {
+            float: left;
+            width: 100px;
+            background-color: gray;
+        }
+        .tooltip-oper {
+            float: right;
+        }
+        .tooltip-oper>div {
+            float: left;
+            padding-left: 15px;
+        }
+        .tooltip-name {
+            max-width: 100px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .logout {
+            padding-right: 20px;
+            cursor: pointer;
+        }
+        .logout:hover {
+            background-color: #1C1C1C;
+        }
+
+        .tooltip-status:hover,
+        #tooltip-container {
+            background-color: #ececec;
+            color: black;
+        }
+        .tooltip-status {
+            position: relative;
+            padding-right: 15px;
+        }
+
+        #tooltip-container {
+            position: absolute;
+            width: 55px;
+            padding: 0 5px 0 20px;
+            cursor: pointer;
+        }
+
+
+    div.tooltip-head.row
+        div.tooltip-log
+        div.tooltip-oper
+            div.tooltip-name xiaoming
+            div.tooltip-status
+                div 未
+                div#tooltip-container.hide 去认证
+            div.logout 退出
+
+    script.
+        $('.tooltip-status').hover(function(e) {
+            var left = $('#tooltip-container').outerWidth() - $('.tooltip-status').outerWidth()
+
+            left = '-' + left + 'px'
+            $('#tooltip-container').removeClass('hide')
+            $('#tooltip-container').css({left: left})
+        }, function(e) {
+            $('#tooltip-container').addClass('hide')
+        })
+
+        $('#tooltip-container').on('click', function() {
+            $(this).addClass('hide')
+            alert(11)
+        })
