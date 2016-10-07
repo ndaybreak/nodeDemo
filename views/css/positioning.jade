@@ -21,6 +21,22 @@ html
 			.content {
 				position: center;
 			}
+			.content-1 {
+				position: absolute;
+				background-color: black;
+			}
+			.content-2 {
+				position: relative;
+				background-color: blue;
+				top: 20px;
+				left: 20px;
+			}
+			.content-1,
+			.content-2 {
+				display: inline-block;
+				height: 60px;
+				width: 60px;
+			}
 			.bottom {
 				height: 100px;
 				background-color: yellow;
@@ -28,5 +44,11 @@ html
 	body
 		div.top top
 		div.center
-			div.content sss
+			div.content-1
+			div.content-2
+
 		div.bottom
+			input(type='text')
+
+		div.info
+			p 凡是非static的元素，后面的都会覆盖前面的(黑蓝块)
