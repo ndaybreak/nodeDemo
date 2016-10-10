@@ -62,13 +62,23 @@ block content
             div.logout 退出
 
     script.
-        $('.tooltip-status').hover(function(e) {
+        //- $('.tooltip-status').hover(function(e) {
+        //-     var left = $('#tooltip-container').outerWidth() - $('.tooltip-status').outerWidth()
+
+        //-     left = '-' + left + 'px'
+        //-     $('#tooltip-container').removeClass('hide')
+        //-     $('#tooltip-container').css({left: left})
+        //- }, function(e) {
+        //-     $('#tooltip-container').addClass('hide')
+        //- })
+
+        $(document).on('hover', '.tooltip-status', function() {
             var left = $('#tooltip-container').outerWidth() - $('.tooltip-status').outerWidth()
 
             left = '-' + left + 'px'
             $('#tooltip-container').removeClass('hide')
             $('#tooltip-container').css({left: left})
-        }, function(e) {
+        }, function() {
             $('#tooltip-container').addClass('hide')
         })
 
