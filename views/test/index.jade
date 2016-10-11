@@ -3,6 +3,7 @@ html
   head
     title testing
     meta(charset='utf-8')
+    link(rel='stylesheet', href="/css/vender.css")
     script(src="/jslib/jquery.js")
     style.
         html{
@@ -21,6 +22,9 @@ html
         }
         .clear{
           clear: both;
+        }
+        .hide {
+          display: none;
         }
         .row {
             display: table;
@@ -81,12 +85,17 @@ html
         }
         .footer{
           width: 100%;
-          height: 50px;
+          height: 110px;
           background-color: #1f2128;
+        }
+        .footer-content {
+            height: 110px;
+            padding-top: 1px;
+            font-size: 13px;
         }
         .content{
           height: 100%;
-          padding-bottom: 90px;
+          padding-bottom: 150px;
           padding-top: 37px;
         }
         .container{
@@ -109,6 +118,10 @@ html
         }
         .memberBar a, .memberBar span, .memberBar div {
             color: #7c7c7c;
+        }
+        .memberBar .left {
+            height: 37px;
+            line-height: 37px;
         }
         .memberBar .right {
             text-align: right;
@@ -147,11 +160,114 @@ html
         .memberBar .memberLogin:hover {
             border: 1px solid #2a96ff
         }
+
+        
+        .right-bar {
+            position: fixed;
+            z-index: 25;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            padding-top: 60px;
+            width: 35px;
+            height: 100%;
+            background-color: #202020;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        .right-bar .bar-item {
+            width: 35px;
+            height: 42px;
+        }
+        .right-bar .bar-ProfileItem {
+            position: relative;
+            margin-bottom: 6px;
+            cursor: pointer;
+        }
+        .right-bar .icon-font {
+            width: 35px;
+            height: 40px;
+            font-size: 18px;
+            color: #fff;
+            text-align: center;
+            line-height: 40px;
+        }
+        
+        .right-bar .icon-focus {
+            background-color: rgb(196,0,0);
+        }
+        .right-bar .bar-item-tip {
+            position: absolute;
+            height: 38px;
+            width: 117px;
+            background-color: #434343;
+            top: 1px;
+            right: 35px;
+            text-align: center;
+            color: #ddd;
+            font-size: 14px;
+            line-height: 38px;
+            opacity: 1;
+        }
+        .right-bar .tip-triangle {
+            position: absolute;
+            font-size: 35px;
+            color: #434343;
+            right: -10px;
+            top: 0;
+        }
+
+        .right-bar .bar-bottomPart {
+            position: absolute;
+            bottom: 81px;
+            height: 140px;
+        }
+        .right-bar .bar-qqItem {
+            position: relative;
+            margin-bottom: 6px;
+            cursor: pointer;
+        }
+        .right-bar .bar-mobiItem {
+            position: relative;
+            margin-bottom: 6px;
+            cursor: pointer;
+        }
+        .right-bar .bar-backTopItem {
+            position: relative;
+            margin-bottom: 6px;
+            cursor: pointer;
+        }
+        .right-bar .mobiItem-logo {
+            background: url('/img/contact_bg.png');
+        }
+        .right-bar .mobiItem-logo.icon-focus {
+            background: url('/img/contact_bg.png') 37px 0;
+        }
+        .right-bar .mobi-img {
+            background: url('http://www.tuochetong.com/truck-saas/img/erweima.png') no-repeat center center;
+            width: 120px;
+            height: 150px;
+            position: absolute;
+            top: -50px;
+            right: 0;
+            z-index: 1;
+        }
+        .right-bar .backtop-logo {
+            font-size: 22px;
+        }
+
+        
+        .footer-content {
+          width: 1200px;
+          margin: 0 auto;
+        }
   body
     div.wraper
         div.header
             div#memberBar.memberBar.row
-                div.col-6.left xiao
+                div.col-6.left
                 div.col-6.right
                     a.memberOption.memberReg(href="javascript:void(0)") 注册
                     a.memberOption.memberLogin(href="javascript:void(0)") 登录
@@ -161,10 +277,59 @@ html
                 div(style="height:100px") ddd
                 div(style="height:100px") ddd
                 div(style="height:100px") ddd
-                div(style="height:100px") ddd
-                div(style="height:100px") ddd
-                div(style="height:100px") ddd
-                div(style="height:100px") ddd
-                div(style="height:100px") ddd
-                div(style="height:100px") ddd
             div.footer
+              div.footer-content
+                h3 联系我们
+                div 地址：上海市浦东新区源深路118号6楼
+                div Tel :  021-65968463
+                div 网址: www.eshippinggateway.com
+
+    //- 右边工具条
+    div.right-bar
+      div.bar-item.bar-ProfileItem
+        div#barProfileLogo.profileItem-logo.icon-font
+          i.fa.fa-qq(aria-hidden="true")
+        div.bar-item-tip.hide 我的资料
+          div.tip-triangle ◆
+
+      div.bar-bottomPart
+        div#barQqItem.bar-qqItem.bar-item
+          div.qqItem-logo.icon-font
+            i.fa.fa-qq(aria-hidden="true")
+          div.bar-item-tip.hide 联系客服
+            div.tip-triangle ◆
+
+        div.bar-mobiItem.bar-item
+          div.mobiItem-logo.icon-font
+          div.bar-item-tip.hide
+            div.mobi-img
+            div.tip-triangle ◆
+
+        div#backTopItem.bar-backTopItem.bar-item
+          div.backtop-logo.icon-font
+            i.fa.fa-angle-up(aria-hidden="true")
+          div.bar-item-tip.hide 回到顶部
+            div.tip-triangle ◆
+
+
+
+    script.
+      $('.bar-item').hover(function() {
+        $(this).find('.icon-font').addClass('icon-focus')
+        $(this).find('div:last-child').removeClass('hide')
+      }, function() {
+        $(this).find('.icon-font').removeClass('icon-focus')
+        $(this).find('div:last-child').addClass('hide')
+      })
+
+      $('#barQqItem').on('click', function() {
+        window.open('http://wpa.b.qq.com/cgi/wpa.php?ln=1&key=XzgwMDA4MTE4NF8yNTc0NzdfODAwMDgxMTg0XzJf')
+      })
+
+      $('#backTopItem').on('click', function() {
+        $('html, body').animate({
+          scrollTop: 0
+        }, 'fast');
+      })
+
+
