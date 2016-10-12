@@ -1,0 +1,60 @@
+doctype html
+html
+  head
+    title testing
+    meta(charset='utf-8')
+    link(rel='stylesheet', href="/css/vender.css")
+    link(rel='stylesheet', href="/css/style.css")
+    script(src="/jslib/jquery.js")
+    script(src="/js/test/common.js")
+  body
+    div.wraper
+        div.header
+            div#memberBar.memberBar.row
+                div.col-6.left
+                div.col-6.right
+                    a.memberOption.memberReg(href="javascript:void(0)") 注册
+                    a.memberOption.memberLogin(href="javascript:void(0)") 登录
+        div.content
+            div.container
+                div.cont-navWrap
+                  div.cont-nav
+                    div.nav-logo
+                      span 拖车港
+                      span TruckHarbour
+                      
+                block content
+
+            div.footer
+              div.footer-content
+                h3 联系我们
+                div 地址：上海市浦东新区源深路118号6楼
+                div Tel :  021-65968463
+                div 网址: www.eshippinggateway.com
+
+    //- 右边工具条
+    div.right-bar
+      div.bar-item.bar-ProfileItem.hide
+        div#barProfileLogo.profileItem-logo.icon-font
+          i.fa.fa-qq(aria-hidden="true")
+        div.bar-item-tip.hide 我的资料
+          div.tip-triangle ◆
+
+      div.bar-bottomPart
+        div#barQqItem.bar-qqItem.bar-item
+          div.qqItem-logo.icon-font
+            i.fa.fa-qq(aria-hidden="true")
+          div.bar-item-tip.hide 联系客服
+            div.tip-triangle ◆
+
+        div.bar-mobiItem.bar-item
+          div.mobiItem-logo.icon-font
+          div.bar-item-tip.hide.disabled-animate
+            div.mobi-img
+            div.tip-triangle ◆
+
+        div#backTopItem.bar-backTopItem.bar-item
+          div.backtop-logo.icon-font
+            i.fa.fa-angle-up(aria-hidden="true")
+          div.bar-item-tip.hide 回到顶部
+            div.tip-triangle ◆

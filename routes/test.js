@@ -12,6 +12,9 @@ router.use(function(req, res, next) {
 router.get('/:id', function(req, res, next) {
   res.render('test/' + req.params.id)
 });
+router.get('/truckHarbour/:id', function(req, res, next) {
+  res.render('test/truckHarbour/' + req.params.id)
+});
 
 
 /* WS listing. */

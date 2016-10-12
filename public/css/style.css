@@ -1,48 +1,280 @@
+*{
+  box-sizing: border-box;
+}
+html{
+  height: 100%;
+}
+body{
+  height: 100%;
+  padding:0;
+  margin:0;
+  font-family: "微软雅黑","宋体";
+  font-size: 12px;
+  color: #666;
+}
+.clear{
+  clear: both;
+}
+.hide {
+  display: none !important;
+}
+.row {
+    display: table;
+    content: " ";
+}
+.col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12 {
+  float: left;
+}
+.col-12 {
+  width: 100%;
+}
+.col-11 {
+  width: 91.66666667%;
+}
+.col-10 {
+  width: 83.33333333%;
+}
+.col-9 {
+  width: 75%;
+}
+.col-8 {
+  width: 66.66666667%;
+}
+.col-7 {
+  width: 58.33333333%;
+}
+.col-6 {
+  width: 50%;
+}
+.col-5 {
+  width: 41.66666667%;
+}
+.col-4 {
+  width: 33.33333333%;
+}
+.col-3 {
+  width: 25%;
+}
+.col-2 {
+  width: 16.66666667%;
+}
+.col-1 {
+  width: 8.33333333%;
+}
+.wraper{
+  position: relative;
+  height: 100%;
+}
+.header{
+  position: fixed;
+  width: 100%;
+  height: 37px;
+  line-height: 37px;
+  top: 0;
+  left: 0;
+  background: url(/img/white_bg.png) repeat-x;
+  z-index: 61;
+}
+.footer{
+  width: 100%;
+  height: 110px;
+  background-color: #1f2128;
+}
+.footer-content {
+    height: 110px;
+    padding-top: 1px;
+    font-size: 13px;
+}
+.content{
+  height: 100%;
+  padding-bottom: 150px;
+  padding-top: 37px;
+}
+.container{
+  position: relative;
+  min-height: 100%;
+  //- border: 1px solid black;
+  margin: 20px 0;
+}
 
-a:link {
- text-decoration: none;
+.memberBar {
+    position: relative;
+    padding: 0;
+    margin: 0 auto;
+    //- width: 960px;
+    text-align: left;
+    color: #000;
 }
-a:visited {
- text-decoration: none;
+#memberBar {
+    width: 1200px;
 }
-a:hover {
- text-decoration: underline;
+.memberBar a, .memberBar span, .memberBar div {
+    color: #7c7c7c;
 }
-a:active {
- text-decoration: none;
+.memberBar .left {
+    height: 37px;
+    line-height: 37px;
 }
-a {
-	cursor: pointer;
+.memberBar .right {
+    text-align: right;
+    padding-right: 10px;
+    color: #555;
 }
-/* .panel-menu {
-  border: 0;
+.memberBar .right a {
+    float: right;
+    text-decoration: none;
 }
-.panel-menu > .panel-heading {
-  color: #9d9d9d;
-  background-color: black;
-  border-color: #d6e9c6;
+.memberBar .right .memberOption {
+    padding: 0 20px;
+    width: auto;
+    height: 24px;
+    line-height: 23px;
+    text-align: center;
+    margin: 6px 6px auto 0;
 }
-.panel-menu > .panel-heading > .panel-title {
-  font-size: 14px;
+.memberBar a:hover {
+    color: #1b7ad1
 }
-.panel-menu > .panel-heading + .panel-collapse > .panel-body {
-  border: 0;
+.memberBar .memberReg {
+    margin-right: 10px !important;
+    border: 1px solid #2a96ff;
+    background-color: #45a2ff;
+    color: #fff;
 }
-.panel-menu > .panel-heading .badge {
-  color: #dff0d8;
-  background-color: black;
+.memberBar .memberReg:hover {
+    border: 1px solid #1489fc;
+    background-color: #2594ff;
+    color: #fff
 }
-.panel-menu > .panel-footer + .panel-collapse > .panel-body {
-  border-bottom-color: #d6e9c6;
+.memberBar .memberLogin {
+    border: 1px solid #dadada;
+}
+.memberBar .memberLogin:hover {
+    border: 1px solid #2a96ff
 }
 
-.panel-menu > .panel-heading {
-  background-image: -webkit-linear-gradient(top, #222 0%, #222 100%);
-  background-image:      -o-linear-gradient(top, #222 0%, #222 100%);
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#222), to(#222));
-  background-image:         linear-gradient(to bottom, #222 0%, #222 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff222222', endColorstr='#ff222222', GradientType=0);
-  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
-  background-repeat: repeat-x;
-  background-color: #222; */
-} */
+
+.right-bar {
+    position: fixed;
+    z-index: 25;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    padding-top: 60px;
+    width: 35px;
+    height: 100%;
+    background-color: #202020;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.right-bar .bar-item {
+    width: 35px;
+    height: 42px;
+}
+.right-bar .bar-ProfileItem {
+    position: relative;
+    margin-bottom: 6px;
+    cursor: pointer;
+}
+.right-bar .icon-font {
+    width: 35px;
+    height: 40px;
+    font-size: 18px;
+    color: #fff;
+    text-align: center;
+    line-height: 40px;
+}
+
+.right-bar .icon-focus {
+    background-color: rgb(196,0,0);
+}
+.right-bar .bar-item-tip {
+    position: absolute;
+    height: 38px;
+    width: 117px;
+    background-color: #434343;
+    top: 1px;
+    right: 60px;
+    text-align: center;
+    color: #ddd;
+    font-size: 14px;
+    line-height: 38px;
+    opacity: 0;
+}
+.right-bar .bar-item-tip.disabled-animate {
+    right: 35px;
+    opacity: 1;
+}
+.right-bar .tip-triangle {
+    position: absolute;
+    font-size: 35px;
+    color: #434343;
+    right: -10px;
+    top: 0;
+}
+
+.right-bar .bar-bottomPart {
+    position: absolute;
+    bottom: 81px;
+    height: 140px;
+}
+.right-bar .bar-qqItem {
+    position: relative;
+    margin-bottom: 6px;
+    cursor: pointer;
+}
+.right-bar .bar-mobiItem {
+    position: relative;
+    margin-bottom: 6px;
+    cursor: pointer;
+}
+.right-bar .bar-backTopItem {
+    position: relative;
+    margin-bottom: 6px;
+    cursor: pointer;
+}
+.right-bar .mobiItem-logo {
+    background: url('/img/contact_bg.png');
+}
+.right-bar .mobiItem-logo.icon-focus {
+    background: url('/img/contact_bg.png') 37px 0;
+}
+.right-bar .mobi-img {
+    background: url('http://www.tuochetong.com/truck-saas/img/erweima.png') no-repeat center center;
+    width: 120px;
+    height: 150px;
+    position: absolute;
+    top: -50px;
+    right: 0;
+    z-index: 1;
+}
+.right-bar .backtop-logo {
+    font-size: 22px;
+}
+
+.footer-content {
+  width: 1200px;
+  margin: 0 auto;
+}
+
+.cont-navWrap {
+  height: 90px;
+}
+.cont-nav {
+  width: 1200px;
+  margin: 0 auto;
+  height: 90px;
+  line-height: 70px;
+}
+.nav-logo {
+  font-family: Arial;
+  color: #1E50AE;
+  font-size: 28px;
+  font-weight: 700;
+  padding-left: 35px;
+}
+.nav-logo span:last-child {
+    margin-left: 15px;
+}

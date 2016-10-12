@@ -1,0 +1,293 @@
+extends layout
+block content
+    style.
+        .cont-banner {
+            width: 1440px;
+            height: 380px;
+            cursor: default;
+            overflow: hidden;
+            display: block;
+            outline: none;
+            margin: 0px auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .banner-group {
+            position: relative;
+            height: 100%;
+        }
+        .banner-group .banner-item:nth-child(1){
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            background-image: url("http://0.ss.faisys.com/image/template/banners/1229.jpg?v=");
+            background-position: 50% 50%;
+            background-repeat: no-repeat;
+            opacity: 1;
+        }
+        .banner-group .banner-item:nth-child(2){
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            background-image: url("http://0.ss.faisys.com/image/template/banners/1988.jpg?v=20140701");
+            background-position: 50% 50%;
+            background-repeat: no-repeat;
+            display: none;
+            opacity: 0;
+        }
+
+        .imageSwitchBtnArea {
+            position: absolute;
+            z-index: 3;
+            display: block;
+            left: 50%;
+            margin-left: -20px;
+            bottom: 5px;
+        }
+        .imageSwitchBtn_dot {
+            display: block;
+            position: relative;
+            float: left;
+            overflow: hidden;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin: 4px 10px 2px 0;
+            background: #e8e8e8;
+            filter: alpha(opacity=50);
+            opacity: .5;
+            cursor: pointer;
+            zoom: 1;
+        }
+        .imageSwitchBtnSel_dot {
+            background: #dbdbdb;
+            filter: alpha(opacity=80);
+            opacity: .8;
+        }
+            
+
+
+
+
+        .cont-content {
+            width: 1200px;
+            margin: 0 auto;
+            padding-top: 120px;
+        }
+        .productShow-title {
+              background: #0077ba;
+              height: 40px;
+              line-height: 40px;
+              padding: 0 15px;
+              color: #FFF;
+              font-size: 15px;
+              font-weight: bold;
+        }
+        .productShow-content {
+            border: 1px solid #eee;
+            border-top: 0;
+            width: 100%;
+            padding: 0 5px;
+        }
+        .product-item {
+            position: relative;
+            float: left;
+            margin: 10px 40px 10px 25px;
+            height: 186px;
+        }
+        .product-item img {
+            width: 121px;
+            height: 160px;
+        }
+        .productItem-label {
+            display: inline-block;
+            position: absolute;
+            width: 100%;
+            left: 0;
+            bottom: 0;
+            line-height: 26px;
+            text-align: center;
+        }
+
+        .statistics-wrap {
+            height: 450px;
+            width: 100%;
+            border: 1px solid #eee;
+            border-top: 0;
+            margin-top: 10px;
+        }
+        .stat-module {
+            text-align: center;
+        }
+        .stat-moduleIcon {
+            padding-right: 10px;
+            margin-bottom: 24px;
+        }
+        .stat-moduleIcon img {
+            width: 145px;
+            height: 145px;
+            margin: 0 auto;
+            display: block;
+        }
+        .stat-moduleValue {
+            font-size: 40px;
+            color: #333639;
+            font-weight: bold;
+        }
+        .stat-moduleLabel {
+            font-size: 16px;
+            color: #999999;
+            line-height: 30px;
+        }
+        .stat-moduleDetal {
+            width: 210px;
+            font-size: 14px;
+            line-height: 28px;
+            color: #C0C0C0;
+            margin: 0 auto;
+        }
+
+    script.
+        $(function() {
+
+            
+            function bindBannerSwitch() {
+                var $bannerGroup = $('#banner-group'),
+                    $dotGroup = $('#imageSwitchBtnArea'),
+                    callbackQueue = [],
+                    interval
+
+                if($bannerGroup.find('.banner-item').length <= 1) {
+                    return
+                }
+
+                function getInterval() {
+                    return setInterval(function() {
+                        var activeBanner = $bannerGroup.find('.banner-active'),
+                            nextBanner = activeBanner.next(),
+                            activeDotIndex
+
+                        if(!nextBanner.length) {
+                            nextBanner = $bannerGroup.find('.banner-item').first()
+                        }
+
+                        activeDotIndex = nextBanner.data('index')
+                        $dotGroup.children().removeClass('imageSwitchBtnSel_dot').eq(activeDotIndex).addClass('imageSwitchBtnSel_dot')
+
+                        nextBanner.show()
+                        nextBanner.animate({
+                            'opacity': 1
+                        }, 1500, function() {
+                            nextBanner.addClass('banner-active')
+                        })
+
+                        activeBanner.animate({
+                            'opacity': 0
+                        }, 1000, function() {
+                            activeBanner.removeClass('banner-active').hide()
+                        })
+                    }, 5000)
+                }
+
+                interval = getInterval()
+
+                setInterval(function() {
+                    var callback = callbackQueue.shift()
+                    if(callback) {
+                        clearInterval(interval)
+                        interval = 0
+                        callback()
+                    } else if(!interval){
+                        interval = getInterval()
+                    }
+                }, 700)
+
+                $('.imageSwitchBtn_dot').on('click', function() {
+                    var clickedDot = $(this),
+                        clickedDotIndex,
+                        oldDotIndex,
+                        oldBanner,
+                        newBanner
+
+                    if(clickedDot.hasClass('imageSwitchBtnSel_dot')) return
+
+                    oldDotIndex = clickedDot.parent().find('.imageSwitchBtnSel_dot').removeClass('imageSwitchBtnSel_dot').data('index')
+                    clickedDotIndex = clickedDot.data('index')
+                    newBanner = $bannerGroup.children().eq(clickedDotIndex)
+                    oldBanner = $bannerGroup.children().eq(oldDotIndex)
+                    
+                    clickedDot.addClass('imageSwitchBtnSel_dot')
+
+                    callbackQueue.push(function() {
+                        oldBanner.removeClass('banner-active')
+                        newBanner.addClass('banner-active').show()
+
+                        oldBanner.animate({
+                            'opacity': 0
+                        }, 500, function() {
+                            oldBanner.hide()
+                        })
+                        newBanner.animate({
+                            'opacity': 1
+                        }, 500)
+                    })
+
+                })
+            }
+
+            bindBannerSwitch()
+        })
+
+    div.cont-banner
+        div#banner-group.banner-group
+            div.banner-item.banner-active(data-index="0")
+            div.banner-item(data-index="1")
+        div#imageSwitchBtnArea.imageSwitchBtnArea
+            a.imageSwitchBtn_dot.imageSwitchBtnSel_dot(data-index="0")
+            a.imageSwitchBtn_dot(data-index="1")
+
+    div.cont-content
+      div.productShow-title 产品展示
+      div.productShow-content.row
+        div.product-item
+            a(href="http://www.bloodloax.icoc.me/pd.jsp?id=9&_pp=2_434")
+                img(src="http://2.ss.faisys.com/image/materialLib/illustration/000017.jpg", alt="内贸起始港-询价")
+            div.productItem-label 内贸起始港-询价
+        div.product-item
+            a(href="http://www.bloodloax.icoc.me/pd.jsp?id=10&_pp=2_434")
+                img(src="http://2.ss.faisys.com/image/materialLib/illustration/000015.jpg", alt="内贸起始港-一口价")
+            div.productItem-label 内贸起始港-一口价
+        div.product-item
+            a(href="pd.jsp?id=11&_pp=2_434")
+                img(src="http://2.ss.faisys.com/image/materialLib/illustration/000032.jpg", alt="内贸起始港-抢单")
+            div.productItem-label 内贸起始港-抢单
+
+      div.statistics-wrap.row
+        div.col-3.stat-module
+            div.stat-moduleIcon
+                img(src="http://10766142.s61i.faiusr.com/4/AD0Ivo6RBRAEGAAg1tzUvQUovpmVtwUwkQE4kQE.png")
+            div.stat-moduleValue 42127
+            div.stat-moduleLabel 完成交易
+            div.stat-moduleDetal 平台自创立以来，已经完成42127笔网上交易
+        div.col-3.stat-module
+            div.stat-moduleIcon
+                img(src="http://10766142.s61i.faiusr.com/4/AD0Ivo6RBRAEGAAgnd3UvQUo3fKYtAQwkQE4kQE.png")
+            div.stat-moduleValue 310
+            div.stat-moduleLabel 货代客户
+            div.stat-moduleDetal 平台自创立以来，为310位货代客户提供服务
+        div.col-3.stat-module
+            div.stat-moduleIcon
+                img(src="http://10766142.s61i.faiusr.com/4/AD0Ivo6RBRAEGAAgrd3UvQUo2q-qBjCRATiRAQ.png")
+            div.stat-moduleValue 322
+            div.stat-moduleLabel 车队客户
+            div.stat-moduleDetal 严谨的运输组织，整洁干净的车辆为您提供最专业的服务
+        div.col-3.stat-module
+            div.stat-moduleIcon
+                img(src="http://10766142.s61i.faiusr.com/4/AD0Ivo6RBRAEGAAgut3UvQUomdS41gcwkQE4kQE.png")
+            div.stat-moduleValue 23000+
+            div.stat-moduleLabel 车辆总数
+            div.stat-moduleDetal 23000多辆集卡，为客户提供足够的运力保障
+      
+
+
