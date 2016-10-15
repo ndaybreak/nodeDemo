@@ -50,8 +50,8 @@ block content
             position: relative;
             float: left;
             overflow: hidden;
-            width: 10px;
-            height: 10px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             margin: 4px 10px 2px 0;
             background: #e8e8e8;
@@ -155,53 +155,37 @@ block content
             function bindBannerSwitch() {
                 var $bannerGroup = $('#banner-group'),
                     $dotGroup = $('#imageSwitchBtnArea'),
-                    callbackQueue = [],
-                    interval
+                    callbackQueue = []
 
                 if($bannerGroup.find('.banner-item').length <= 1) {
                     return
                 }
 
-                function getInterval() {
-                    return setInterval(function() {
-                        var activeBanner = $bannerGroup.find('.banner-active'),
-                            nextBanner = activeBanner.next(),
-                            activeDotIndex
-
-                        if(!nextBanner.length) {
-                            nextBanner = $bannerGroup.find('.banner-item').first()
-                        }
-
-                        activeDotIndex = nextBanner.data('index')
-                        $dotGroup.children().removeClass('imageSwitchBtnSel_dot').eq(activeDotIndex).addClass('imageSwitchBtnSel_dot')
-
-                        nextBanner.show()
-                        nextBanner.animate({
-                            'opacity': 1
-                        }, 2500, function() {
-                            nextBanner.addClass('banner-active')
-                        })
-
-                        activeBanner.animate({
-                            'opacity': 0
-                        }, 2000, function() {
-                            activeBanner.removeClass('banner-active').hide()
-                        })
-                    }, 5000)
-                }
-
-                interval = getInterval()
-
                 setInterval(function() {
-                    var callback = callbackQueue.shift()
-                    if(callback) {
-                        clearInterval(interval)
-                        interval = 0
-                        callback()
-                    } else if(!interval){
-                        interval = getInterval()
+                    var activeBanner = $bannerGroup.find('.banner-active'),
+                        nextBanner = activeBanner.next(),
+                        activeDotIndex
+
+                    if(!nextBanner.length) {
+                        nextBanner = $bannerGroup.find('.banner-item').first()
                     }
-                }, 700)
+
+                    activeDotIndex = nextBanner.data('index')
+                    $dotGroup.children().removeClass('imageSwitchBtnSel_dot').eq(activeDotIndex).addClass('imageSwitchBtnSel_dot')
+
+                    nextBanner.show()
+                    nextBanner.animate({
+                        'opacity': 1
+                    }, 2000, function() {
+                        nextBanner.addClass('banner-active')
+                    })
+
+                    activeBanner.animate({
+                        'opacity': 0
+                    }, 2000, function() {
+                        activeBanner.removeClass('banner-active').hide()
+                    })
+                }, 5000)
 
                 $('.imageSwitchBtn_dot').on('click', function() {
                     var clickedDot = $(this),
@@ -217,21 +201,20 @@ block content
                     newBanner = $bannerGroup.children().eq(clickedDotIndex)
                     oldBanner = $bannerGroup.children().eq(oldDotIndex)
 
+                    $('#banner-group .banner-item').stop(true,true)
+
                     clickedDot.addClass('imageSwitchBtnSel_dot')
+                    oldBanner.removeClass('banner-active').show().css('opacity', 0.5)
+                    newBanner.addClass('banner-active').show().css('opacity', 0.5)
 
-                    callbackQueue.push(function() {
-                        oldBanner.removeClass('banner-active')
-                        newBanner.addClass('banner-active').show()
-
-                        oldBanner.animate({
-                            'opacity': 0
-                        }, 500, function() {
-                            oldBanner.hide()
-                        })
-                        newBanner.animate({
-                            'opacity': 1
-                        }, 500)
+                    oldBanner.animate({
+                        'opacity': 0
+                    }, 500, function() {
+                        oldBanner.hide()
                     })
+                    newBanner.animate({
+                        'opacity': 1
+                    }, 500)
 
                 })
             }
