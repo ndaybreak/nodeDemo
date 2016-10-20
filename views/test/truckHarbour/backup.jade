@@ -333,3 +333,91 @@ html
       })
 
 
+
+
+
+
+
+//- function bindBannerSwitch() {
+//-             var $bannerGroup = ES.get('#banner-group'),
+//-                 $dotGroup = ES.get('#imageSwitchBtnArea'),
+//-                 callbackQueue = [],
+//-                 interval
+
+//-             if($bannerGroup.find('.banner-item').length <= 1) {
+//-                 return
+//-             }
+
+//-             function getInterval() {
+//-                 return setInterval(function() {
+//-                     var activeBanner = $bannerGroup.find('.banner-active'),
+//-                         nextBanner = activeBanner.next(),
+//-                         activeDotIndex
+
+//-                     if(!nextBanner.length) {
+//-                         nextBanner = $bannerGroup.find('.banner-item').first()
+//-                     }
+
+//-                     activeDotIndex = nextBanner.data('index')
+//-                     $dotGroup.children().removeClass('imageSwitchBtnSel_dot').eq(activeDotIndex).addClass('imageSwitchBtnSel_dot')
+
+//-                     nextBanner.show()
+//-                     nextBanner.animate({
+//-                         'opacity': 1
+//-                     }, 1500, function() {
+//-                         nextBanner.addClass('banner-active')
+//-                     })
+
+//-                     activeBanner.animate({
+//-                         'opacity': 0
+//-                     }, 1000, function() {
+//-                         activeBanner.removeClass('banner-active').hide()
+//-                     })
+//-                 }, 5000)
+//-             }
+
+//-             interval = getInterval()
+
+//-             setInterval(function() {
+//-                 var callback = callbackQueue.shift()
+//-                 if(callback) {
+//-                     clearInterval(interval)
+//-                     interval = 0
+//-                     callback()
+//-                 } else if(!interval){
+//-                     interval = getInterval()
+//-                 }
+//-             }, 700)
+
+//-             ES.get('.imageSwitchBtn_dot').on('click', function() {
+//-                 var clickedDot = ES.get(this),
+//-                     clickedDotIndex,
+//-                     oldDotIndex,
+//-                     oldBanner,
+//-                     newBanner
+
+//-                 if(clickedDot.hasClass('imageSwitchBtnSel_dot')) return
+
+//-                 oldDotIndex = clickedDot.parent().find('.imageSwitchBtnSel_dot').removeClass('imageSwitchBtnSel_dot').data('index')
+//-                 clickedDotIndex = clickedDot.data('index')
+//-                 newBanner = $bannerGroup.children().eq(clickedDotIndex)
+//-                 oldBanner = $bannerGroup.children().eq(oldDotIndex)
+
+//-                 clickedDot.addClass('imageSwitchBtnSel_dot')
+
+//-                 callbackQueue.push(function() {
+//-                     oldBanner.removeClass('banner-active')
+//-                     newBanner.addClass('banner-active').show()
+
+//-                     oldBanner.animate({
+//-                         'opacity': 0
+//-                     }, 500, function() {
+//-                         oldBanner.hide()
+//-                     })
+//-                     newBanner.animate({
+//-                         'opacity': 1
+//-                     }, 500)
+//-                 })
+
+//-             })
+//-         }
