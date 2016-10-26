@@ -1,0 +1,62 @@
+<!-- <!DOCTYPE html>
+<html>
+    <head>
+        <title>loadMapAsyncHTML</title>
+        <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
+    </head>
+    <body>
+        <div id='printoutPanel'></div>
+        
+        <div id='myMap' style='width: 100vw; height: 100vh;'></div>
+        <script type='text/javascript'>
+                var map;
+                function loadMapScenario() {
+                    map = new Microsoft.Maps.Map(document.getElementById('myMap'), {
+                        credentials: 'rSWZbMBfULl58IuQoXSQ~kILXqA1oBV0DiGnDnu9rYQ~Asd9yOkdWA-UEuJ3cgwB3_8ycHDA8g9lesvNHwP9L58Ji2LHCOziClwhO4Oy9KBC'
+                    });
+                }
+                
+            
+        </script>
+        <script type='text/javascript' src='https://cn.bing.com/mapspreview/sdk/mapcontrol?branch=release&callback=loadMapScenario' async defer></script>
+    </body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>searchByAddressHTML</title>
+        <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
+    </head>
+    <body>
+        <div id='printoutPanel'></div>
+        
+        <div id='myMap' style='width: 100vw; height: 100vh;'></div>
+        <script type='text/javascript'>
+            function loadMapScenario() {
+                var map = new Microsoft.Maps.Map(document.getElementById('myMap'), {
+                    credentials: 'rSWZbMBfULl58IuQoXSQ~kILXqA1oBV0DiGnDnu9rYQ~Asd9yOkdWA-UEuJ3cgwB3_8ycHDA8g9lesvNHwP9L58Ji2LHCOziClwhO4Oy9KBC'
+                });
+                Microsoft.Maps.loadModule('Microsoft.Maps.Search', function () {
+                    var searchManager = new Microsoft.Maps.Search.SearchManager(map);
+                    var requestOptions = {
+                        bounds: map.getBounds(),
+                        where: '源深收到路1181号',
+                        callback: function (answer, userData) {
+                            map.setView({ bounds: answer.results[0].bestView });
+                            map.entities.push(new Microsoft.Maps.Pushpin(answer.results[0].location));
+                            console.log(answer.results[0].location)
+                        },
+                        errorCallback: function() {
+                            console.log(arguments)
+                        }
+                    };
+                    searchManager.geocode(requestOptions);
+                });
+                
+            }
+        </script>
+        <script type='text/javascript' src='https://cn.bing.com/mapspreview/sdk/mapcontrol?branch=release&callback=loadMapScenario' async defer></script>
+    </body>
+</html>

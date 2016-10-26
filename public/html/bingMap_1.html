@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>directionsCreateDrivingRouteHTML</title>
+        <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
+        <script src="../jslib/jquery.js"></script>
+    </head>
+    <body>
+        <!-- <div id='printoutPanel'></div> -->
+        <div>
+            <input type="text" id="start">
+            <input type="text" id="end" style="margin-left: 100px">
+            <input type="button" id="search" style="margin-left: 100px">
+
+        </div>
+        <div id='myMap' style='width: 100vw; height: 100vh;'></div>
+        <script type='text/javascript'>
+            $(function() {
+
+                function initMap(callback) {
+                    window.bingMapLoaded = function (){
+                        var map = new Microsoft.Maps.Map(document.getElementById('myMap'), {
+                            credentials: 'rSWZbMBfULl58IuQoXSQ~kILXqA1oBV0DiGnDnu9rYQ~Asd9yOkdWA-UEuJ3cgwB3_8ycHDA8g9lesvNHwP9L58Ji2LHCOziClwhO4Oy9KBC',
+                            center: new Microsoft.Maps.Location(47.606209, -122.332071),
+                            zoom: 12
+                        });
+                        callback(map)
+                    }
+                    if($("#bingMap").length > 0){
+                        window.bingMapLoaded();
+                        return
+                    }
+                    var script =document.createElement("script");
+                    script.type = "text/javascript";
+                    script.src = "https://cn.bing.com/mapspreview/sdk/mapcontrol?branch=release&callback=bingMapLoaded";
+                    script.setAttribute("id","bingMap");
+                    document.body.appendChild(script);
+                }
+
+                function loadAllModules(modules, callback) {
+                    var total = modules.length,
+                        count = 0
+
+                    for(var i = 0; i < total; i++) {
+                        Microsoft.Maps.loadModule(modules[i], function () {
+                            if(++count === total) {
+                                callback()
+                            }
+                        });
+                    }
+                }
+
+                function getLocations(searchManager, addressList, callback) {
+                    function getSingleLocation(where, callback) {
+                        var requestOptions = {
+                            where: where,
+                            callback: function (answer, userData) {
+                                callback(answer.results[0].location)
+                            },
+                            errorCallback: function() {
+                                callback(false)
+                            }
+                        };
+                        searchManager.geocode(requestOptions);
+                    }
+
+                    var total = addressList.length,
+                        count = 0,
+                        locations = []
+
+                    for(var i = 0; i < total; i++) {
+                        getSingleLocation(addressList[i], function(location) {
+                            if(location) {
+                                locations.push(location)
+                                if(locations.length === total) {
+                                    callback(locations)
+                                }
+                            } else {
+                                callback(false)
+                            }
+                        })
+                    }
+                }
+
+                initMap(function(map) {
+                    //, 'Microsoft.Maps.Search'
+                    var modules = ['Microsoft.Maps.Directions']
+                    loadAllModules(modules, function() {
+                        var directionsManager = new Microsoft.Maps.Directions.DirectionsManager(map);
+                        // Set Route Mode to driving
+                        directionsManager.setRequestOptions({ routeMode: Microsoft.Maps.Directions.RouteMode.driving });
+                        
+                        var searchManager = new Microsoft.Maps.Search.SearchManager(map);
+
+                        $(document).on('click', '#search', function() {
+                            var start = $('#start').val(),
+                                end = $('#end').val()
+
+                            getLocations(searchManager, [start, end], function(locations) {
+                                if(locations) {
+                                    var waypoint1 = new Microsoft.Maps.Directions.Waypoint({ address: locations[0]['name'], location: new Microsoft.Maps.Location(locations[0]['latitude'], locations[0]['longitude']) });
+                                    var waypoint2 = new Microsoft.Maps.Directions.Waypoint({ address: locations[1]['name'], location: new Microsoft.Maps.Location(locations[1]['latitude'], locations[1]['longitude']) });
+
+                                    directionsManager.clearAll();
+                                    directionsManager.addWaypoint(waypoint1);
+                                    directionsManager.addWaypoint(waypoint2);
+                                    // Set the element in which the itinerary will be rendered
+                                    // directionsManager.setRenderOptions({ itineraryContainer: document.getElementById('printoutPanel') });
+                                    directionsManager.calculateDirections();
+                                } else {
+                                    alert('找不到')
+                                }
+                            })
+                        })
+                    })
+                })
+
+            })
+        </script>
+        <!-- <script type='text/javascript' src='https://cn.bing.com/mapspreview/sdk/mapcontrol?branch=release&callback=loadMapScenario' async defer></script> -->
+    </body>
+</html>

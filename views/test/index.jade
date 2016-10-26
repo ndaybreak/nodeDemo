@@ -1,0 +1,204 @@
+doctype html
+html
+  head
+    title testing
+    meta(charset='utf-8')
+    link(rel='stylesheet', href="/css/vender.css")
+    link(rel='stylesheet', href="/css/style.css")
+    script(src="/jslib/jquery.js")
+    script(src="/js/test/common.js")
+    style.
+        .cont-banner {
+            width: 1440px;
+            height: 380px;
+            cursor: default;
+            overflow: hidden;
+            display: block;
+            outline: none;
+            margin: 0px auto;
+            position: relative;
+            z-index: 1;
+            background-image: url("http://0.ss.faisys.com/image/template/banners/1229.jpg?v=");
+            background-position: 50% 50%;
+            background-repeat: no-repeat;
+        }
+
+        .cont-content {
+            width: 1200px;
+            margin: 0 auto;
+            padding-top: 120px;
+        }
+        .productShow-title {
+              background: #0077ba;
+              height: 40px;
+              line-height: 40px;
+              padding: 0 15px;
+              color: #FFF;
+              font-size: 15px;
+              font-weight: bold;
+        }
+        .productShow-content {
+            border: 1px solid #eee;
+            border-top: 0;
+            width: 100%;
+            padding: 0 5px;
+        }
+        .product-item {
+            position: relative;
+            float: left;
+            margin: 10px 40px 10px 25px;
+            height: 186px;
+        }
+        .product-item img {
+            width: 121px;
+            height: 160px;
+        }
+        .productItem-label {
+            display: inline-block;
+            position: absolute;
+            width: 100%;
+            left: 0;
+            bottom: 0;
+            line-height: 26px;
+            text-align: center;
+        }
+
+        .statistics-wrap {
+            height: 450px;
+            width: 100%;
+            border: 1px solid #eee;
+            border-top: 0;
+            margin-top: 10px;
+        }
+        .stat-module {
+            text-align: center;
+        }
+        .stat-moduleIcon {
+            padding-right: 10px;
+            margin-bottom: 24px;
+        }
+        .stat-moduleIcon img {
+            width: 145px;
+            height: 145px;
+            margin: 0 auto;
+            display: block;
+        }
+        .stat-moduleValue {
+            font-size: 40px;
+            color: #333639;
+            font-weight: bold;
+        }
+        .stat-moduleLabel {
+            font-size: 16px;
+            color: #999999;
+            line-height: 30px;
+        }
+        .stat-moduleDetal {
+            width: 210px;
+            font-size: 14px;
+            line-height: 28px;
+            color: #C0C0C0;
+            margin: 0 auto;
+        }
+  body
+    div.wraper
+        div.header
+            div#memberBar.memberBar.row
+                div.col-6.left
+                div.col-6.right
+                    a.memberOption.memberReg(href="javascript:void(0)") 注册
+                    a.memberOption.memberLogin(href="javascript:void(0)") 登录
+        div.content
+            div.container
+                div.cont-navWrap
+                  div.cont-nav
+                    div.nav-logo
+                      span 拖车港
+                      span TruckHarbour
+                div.cont-banner
+                div.cont-content
+                  div.productShow-title 产品展示
+                  div.productShow-content.row
+                    div.product-item
+                        a(href="http://www.bloodloax.icoc.me/pd.jsp?id=9&_pp=2_434")
+                            img(src="http://2.ss.faisys.com/image/materialLib/illustration/000017.jpg", alt="内贸起始港-询价")
+                        div.productItem-label 内贸起始港-询价
+                    div.product-item
+                        a(href="http://www.bloodloax.icoc.me/pd.jsp?id=10&_pp=2_434")
+                            img(src="http://2.ss.faisys.com/image/materialLib/illustration/000015.jpg", alt="内贸起始港-一口价")
+                        div.productItem-label 内贸起始港-一口价
+                    div.product-item
+                        a(href="pd.jsp?id=11&_pp=2_434")
+                            img(src="http://2.ss.faisys.com/image/materialLib/illustration/000032.jpg", alt="内贸起始港-抢单")
+                        div.productItem-label 内贸起始港-抢单
+
+                  div.statistics-wrap.row
+                    div.col-3.stat-module
+                        div.stat-moduleIcon
+                            img(src="http://10766142.s61i.faiusr.com/4/AD0Ivo6RBRAEGAAg1tzUvQUovpmVtwUwkQE4kQE.png")
+                        div.stat-moduleValue 42127
+                        div.stat-moduleLabel 完成交易
+                        div.stat-moduleDetal 平台自创立以来，已经完成42127笔网上交易
+                    div.col-3.stat-module
+                        div.stat-moduleIcon
+                            img(src="http://10766142.s61i.faiusr.com/4/AD0Ivo6RBRAEGAAgnd3UvQUo3fKYtAQwkQE4kQE.png")
+                        div.stat-moduleValue 310
+                        div.stat-moduleLabel 货代客户
+                        div.stat-moduleDetal 平台自创立以来，为310位货代客户提供服务
+                    div.col-3.stat-module
+                        div.stat-moduleIcon
+                            img(src="http://10766142.s61i.faiusr.com/4/AD0Ivo6RBRAEGAAgrd3UvQUo2q-qBjCRATiRAQ.png")
+                        div.stat-moduleValue 322
+                        div.stat-moduleLabel 车队客户
+                        div.stat-moduleDetal 严谨的运输组织，整洁干净的车辆为您提供最专业的服务
+                    div.col-3.stat-module
+                        div.stat-moduleIcon
+                            img(src="http://10766142.s61i.faiusr.com/4/AD0Ivo6RBRAEGAAgut3UvQUomdS41gcwkQE4kQE.png")
+                        div.stat-moduleValue 23000+
+                        div.stat-moduleLabel 车辆总数
+                        div.stat-moduleDetal 23000多辆集卡，为客户提供足够的运力保障
+
+
+
+
+
+            div.footer
+              div.footer-content
+                h3 联系我们
+                div 地址：上海市浦东新区源深路118号6楼
+                div Tel :  021-65968463
+                div 网址: www.eshippinggateway.com
+
+    //- 右边工具条
+    div.right-bar
+      div.bar-item.bar-ProfileItem.hide
+        div#barProfileLogo.profileItem-logo.icon-font
+          i.fa.fa-qq(aria-hidden="true")
+        div.bar-item-tip.hide 我的资料
+          div.tip-triangle ◆
+
+      div.bar-bottomPart
+        div#barQqItem.bar-qqItem.bar-item
+          div.qqItem-logo.icon-font
+            i.fa.fa-qq(aria-hidden="true")
+          div.bar-item-tip.hide 联系客服
+            div.tip-triangle ◆
+
+        div.bar-mobiItem.bar-item
+          div.mobiItem-logo.icon-font
+          div.bar-item-tip.hide.disabled-animate
+            div.mobi-img
+            div.tip-triangle ◆
+
+        div#backTopItem.bar-backTopItem.bar-item
+          div.backtop-logo.icon-font
+            i.fa.fa-angle-up(aria-hidden="true")
+          div.bar-item-tip.hide 回到顶部
+            div.tip-triangle ◆
+
+
+
+    script.
+      
+
+
