@@ -3,10 +3,16 @@
     <head>
         <title>directionsCreateDrivingRouteHTML</title>
         <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
+        <style>
+            .directionsPanel > div[data-tag=dirInstructions] {
+                display: none;
+            }
+        </style>
     </head>
     <body>
         
         <div id='myMap' style='width: 1200px; height: 600px; float: left'></div>
+        <div id='printoutPane2' style="float: right"></div>
         <div id='printoutPanel' style="float: right"></div>
         <script type='text/javascript'>
             function loadMapScenario() {
@@ -25,17 +31,23 @@
                     directionsManager.addWaypoint(waypoint2);
                     // Set the element in which the itinerary will be rendered
                     directionsManager.setRenderOptions({
-                        itineraryContainer: document.getElementById('printoutPanel'),
-                        autoDisplayDisambiguation: false,
-                        displayManeuverIcons: false,
-                        displayPostItineraryItemHints: false,
-                        displayDisclaimer: true,
-                        displayManeuverIcons: false,
-                        displayPreItineraryItemHints: false
+                        itineraryContainer: document.getElementById('printoutPanel')
+                        // autoDisplayDisambiguation: false,
+                        // displayManeuverIcons: false,
                         // displayPostItineraryItemHints: false,
-                        // displayRouteSelector: false,
+                        // displayDisclaimer: true,
+                        // displayManeuverIcons: false,
+                        // displayPreItineraryItemHints: false,
+                        // // displayRouteSelector: false,
+                        // displayTrafficAvoidanceOption: false,
+                        // // displayWalkingWarning: false,
                         // displayStepWarnings: false
                     });
+
+                    Microsoft.Maps.Events.addHandler(directionsManager, 'directionsUpdated', function () {
+                        document.getElementById('printoutPane2').innerHTML = 'Directions updated event fired!!!';
+                    });
+
                     directionsManager.calculateDirections();
                 });
                 

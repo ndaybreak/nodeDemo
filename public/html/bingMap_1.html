@@ -4,16 +4,27 @@
         <title>directionsCreateDrivingRouteHTML</title>
         <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
         <script src="../jslib/jquery.js"></script>
+        <style>
+            html,
+            body {
+                height: 100%;
+                width: 100%;
+            }
+            .directionsPanel > div[data-tag=dirInstructions] {
+                display: none;
+            }
+        </style>
     </head>
     <body>
         <!-- <div id='printoutPanel'></div> -->
         <div>
-            <input type="text" id="start">
-            <input type="text" id="end" style="margin-left: 100px">
-            <input type="button" id="search" style="margin-left: 100px">
+            <input type="text" id="start" value="勒阿弗尔">
+            <input type="text" id="end" style="margin-left: 100px" value="troyes">
+            <input type="button" id="search" style="margin-left: 100px" value="计算路线">
 
         </div>
-        <div id='myMap' style='width: 100vw; height: 100vh;'></div>
+        <div id='myMap' style='width: 80%; float: left'></div>
+        <div id='printoutPanel' style="width: 20%; float: right"></div>
         <script type='text/javascript'>
             $(function() {
 
@@ -89,6 +100,10 @@
                         var directionsManager = new Microsoft.Maps.Directions.DirectionsManager(map);
                         // Set Route Mode to driving
                         directionsManager.setRequestOptions({ routeMode: Microsoft.Maps.Directions.RouteMode.driving });
+                        Microsoft.Maps.Events.addHandler(directionsManager, 'directionsUpdated', function () {
+                            // alert('Directions updated event fired!!!');
+                        });
+
                         
                         var searchManager = new Microsoft.Maps.Search.SearchManager(map);
 
@@ -105,7 +120,7 @@
                                     directionsManager.addWaypoint(waypoint1);
                                     directionsManager.addWaypoint(waypoint2);
                                     // Set the element in which the itinerary will be rendered
-                                    // directionsManager.setRenderOptions({ itineraryContainer: document.getElementById('printoutPanel') });
+                                    directionsManager.setRenderOptions({ itineraryContainer: document.getElementById('printoutPanel') });
                                     directionsManager.calculateDirections();
                                 } else {
                                     alert('找不到')
@@ -117,6 +132,5 @@
 
             })
         </script>
-        <!-- <script type='text/javascript' src='https://cn.bing.com/mapspreview/sdk/mapcontrol?branch=release&callback=loadMapScenario' async defer></script> -->
     </body>
 </html>
