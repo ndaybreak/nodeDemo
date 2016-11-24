@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>image</title>
+	<style>
+		.hide {
+			display: none;
+		}
+		.img-bg,
+		.img-container {
+			position: fixed;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+		}
+		.img-bg {
+			background-color: #000;
+			opacity: 0.5;
+		}
+		.img-content {
+			width: 500px;
+			height: 500px;
+			margin: 10% auto;
+			overflow: hidden;
+		}
+		.img-content img {
+			width: 500px;
+			height: 500px;
+		}
+	</style>
+	<script src="../jslib/jquery.js"></script>
+	<script>
+		$(function() {
+			$(document).on('click', '#show', function() {
+				$('.img-bg').removeClass('hide')
+				$('.img-container').removeClass('hide')
+			})
+		})
+	</script>
+</head>
+<body>
+	<input type="button" value="show image" id="show">
+	<div class="img-bg hide"></div>
+	<div class="img-container hide">
+		<div class="img-content">
+			<img src="../img/列表1.jpg" alt="">			
+		</div>
+	</div>
+</body>
+</html>
