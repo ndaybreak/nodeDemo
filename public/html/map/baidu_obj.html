@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Baidu</title>
+	<style>
+		#map-container {
+			width: 300px;
+			height: 400px;
+		}
+		.BMap_Marker {
+			background-size: 200%;
+		}
+	</style>
+	<script src="../../jslib/jquery.js"></script>
+	<script>
+		$(function() {
+
+			/**
+			 * private: map markers labels
+			 * */
+			var mapPart = {
+				_map: null,
+				_markers: {},
+				_labels: {},
+				_createMap: function() {
+					var map = this._map = new BMap.Map('map-container', { mapType: BMAP_NORMAL_MAP })
+					map.setMapStyle({
+						enableMapClick: false
+					})
+					map.addControl(new BMap.NavigationControl({
+						type: BMAP_NAVIGATION_CONTROL_SMALL
+					}))
+					map.centerAndZoom(new BMap.Point(110, 34.723596), 6)
+					map.enableScrollWheelZoom(true)
+				},
+				addCover: function(vehicle) { //添加覆盖物
+					var startRendered = false,
+						endRendered = false,
+						map = this._map,
+						markers = this._markers,
+						labels = this._labels
+
+					function createMarker(point, type) {
+						var iconName = type == 'start' ? '../../img/map-icon2.png' : '../../img/vehicle_icon.png',
+							icon,
+							marker
+
+						if(type == 'start') {
+							icon = new BMap.Icon(iconName, new BMap.Size(30,41));
+							marker = new BMap.Marker(point, {icon:icon, offset: new BMap.Size(0, -15) });
+						} else {
+							icon = new BMap.Icon(iconName, new BMap.Size(40,40));
+							marker = new BMap.Marker(point, {icon:icon, offset: new BMap.Size(0, -15) });
+						}
+						map.addOverlay(marker);
+
+						markers[vehicle.id + '_' + type] = marker
+					}
+
+					function createLabel(point, text, type) {
+						var opts = {
+							position : point    // 指定文本标注所在的地理位置
+						}
+						if(type == 'start') {
+							opts.offset = new BMap.Size(-50, -70)    //设置文本偏移量
+						} else {
+							opts.offset = new BMap.Size(-50, -60)
+						}
+						var label = new BMap.Label(text, opts);  // 创建文本标注对象
+						label.setStyle({
+							color : "white",
+							fontSize : "12px",
+							height : "24px",
+							lineHeight : "24px",
+							fontFamily:"微软雅黑",
+							backgroundColor: 'black',
+							border: 'none',
+							padding: '3px 8px',
+							borderRadius: '3px'
+						});
+						map.addOverlay(label);
+						labels[vehicle.id + '_' + type] = label
+					}
+
+					//创建覆盖物
+					if(markers[vehicle.id + '_start']) {
+						markers[vehicle.id + '_start'].show()
+						labels[vehicle.id + '_start'].show()
+						startRendered = true
+					} else {
+						if(vehicle.startPoint) {
+							createLabel(vehicle.startPoint, vehicle.startAddr, 'start')
+							createMarker(vehicle.startPoint, 'start')
+							startRendered = true
+						}
+					}
+
+					if(markers[vehicle.id + '_end']) {
+						markers[vehicle.id + '_end'].show()
+						labels[vehicle.id + '_end'].show()
+						endRendered = true
+					} else {
+						if(vehicle.endPoint) {
+							createLabel(vehicle.endPoint, vehicle.endAddr, 'end')
+							createMarker(vehicle.endPoint, 'end')
+							endRendered = true
+						}
+					}
+
+					if(startRendered && endRendered) {
+						vehicle.centerPoint = vehicle.centerPoint || new BMap.Point((vehicle.startPoint.lng + vehicle.endPoint.lng)/2, (vehicle.startPoint.lat + vehicle.endPoint.lat)/2)
+						var maxLng = vehicle.startPoint.lng > vehicle.endPoint.lng ? vehicle.startPoint.lng : vehicle.endPoint.lng
+						var minLng = vehicle.startPoint.lng > vehicle.endPoint.lng ? vehicle.endPoint.lng : vehicle.startPoint.lng
+						var maxLat = vehicle.startPoint.lat > vehicle.endPoint.lat ? vehicle.startPoint.lat : vehicle.endPoint.lat
+						var minLat = vehicle.startPoint.lat > vehicle.endPoint.lat ? vehicle.endPoint.lat : vehicle.startPoint.lat
+						map.setViewport([new BMap.Point(minLng, minLat - .05), new BMap.Point(maxLng + .05, maxLat + .08)])
+
+						map.panTo(vehicle.centerPoint)
+						if(vehicle.distance < 1000) {
+							map.centerAndZoom(vehicle.centerPoint, 17);
+						} else if(vehicle.distance < 2000) {
+							map.centerAndZoom(vehicle.centerPoint, 16);
+						} else if(vehicle.distance < 3000) {
+							map.centerAndZoom(vehicle.centerPoint, 15);
+						} else if(vehicle.distance < 5000) {
+							map.centerAndZoom(vehicle.centerPoint, 14);
+						} else if(vehicle.distance < 10000) {
+							map.centerAndZoom(vehicle.centerPoint, 13);
+						}
+					} else if(startRendered) {
+						map.centerAndZoom(vehicle.startPoint, 15);
+					} else if(endRendered) {
+						map.centerAndZoom(vehicle.endPoint, 15);
+					}
+				},
+				removeAllCovers: function() {
+					var markers = this._markers,
+							labels = this._labels
+
+					for(var attr in markers) {
+						if(markers.hasOwnProperty(attr)) {
+							markers[attr].hide()
+						}
+					}
+					for(var para in labels) {
+						if(labels.hasOwnProperty(para)) {
+							labels[para].hide()
+						}
+					}
+				},
+				init: function(callback) {
+					if($('#bMapScript').length === 0) {
+						var script = document.createElement("script")
+						script.id = 'bMapScript'
+						script.type = "text/javascript"
+						script.src = "http://api.map.baidu.com/api?v=2.0&ak=GOEGRcwYZBAXOlU7a0bwf9DV&callback=truckCallback"
+						document.body.appendChild(script)
+						!(function(_this) {
+							window.truckCallback = function() {
+								_this._createMap()
+								callback()
+							}
+						})(this)
+					}else {
+						this._createMap()
+						callback()
+					}
+				}
+			}
+
+			var data = [{
+				id: 1,
+				startAddr: '浦东新区周浦镇万达广场',
+//				endAddr: '浦东新区康馨苑'
+				endAddr: '浦东新区周浦中学'
+//				endAddr: '浦东新区下沙学校'
+//				endAddr: '浦东新区质子重离子医院'
+			}, {
+				id: 2,
+				startAddr: '上海市火车站',
+				endAddr: '上海市滴水湖'
+			}, {
+				id: 3,
+				startAddr: '上海市虹桥机场',
+				endAddr: '上海市政府'
+			}]
+
+			function formatData(list, callback) {
+				var map = new BMap.Map(),
+					finishedCount = 0
+
+				function checkFinished() {
+					if(finishedCount === list.length) {
+						callback()
+					}
+				}
+
+				function getPoint(value, fnCallback) {
+					// 创建地址解析器实例
+					var myGeo = new BMap.Geocoder()
+					myGeo.getPoint(value, function(point){
+						if (point) {
+							fnCallback(point)
+						}else{
+							fnCallback(false)
+						}
+					})
+				}
+
+				function computeDistance(vehicle) {
+					var searchComplete = function (results){
+						if (transit.getStatus() != BMAP_STATUS_SUCCESS){
+							vehicle.distance = 0
+							finishedCount ++
+							checkFinished()
+							return
+						} else {
+							var plan = results.getPlan(0),
+								distance = plan.getDistance(false) // false: 返回数值（米为单位）， true: 返回格式化后的字符串，单位可能为米或千米
+//							distance = parseFloat(distance.substring(0, distance.length-2))
+							vehicle.distance = distance
+							finishedCount ++
+							checkFinished()
+						}
+					}
+					var transit = new BMap.DrivingRoute(map, {
+						onSearchComplete: searchComplete
+					});
+
+					transit.search(vehicle.startPoint, vehicle.endPoint)
+				}
+
+				function checkAllRendered(count, vehicle) {
+					if(count === 2) {
+						if(vehicle.startPoint && vehicle.endPoint) {
+							computeDistance(vehicle)
+						} else {
+							vehicle.distance = 0
+							finishedCount++
+							checkFinished()
+						}
+					}
+				}
+
+				function formatVehicle(vehicle) {
+					var startFlag = false,
+						endFlag = false,
+						count = 0
+
+					getPoint(vehicle.startAddr, function(point) {
+						if(point) {
+							vehicle.startPoint = point
+							startFlag = true
+						} else {
+							vehicle.startPoint = false
+						}
+						count++
+						checkAllRendered(count, vehicle)
+					})
+					getPoint(vehicle.endAddr, function(point) {
+						if(point) {
+							vehicle.endPoint = point
+							endFlag = true
+						} else {
+							vehicle.endPoint = false
+						}
+						count++
+						checkAllRendered(count, vehicle)
+					})
+				}
+				$.each(list, function(i, vehicle) {
+					formatVehicle(vehicle)
+				})
+			}
+
+
+			var map = Object.create(mapPart)
+			map.init(function() {
+				formatData(data, function() {
+					console.log('finished...')
+					console.log(data)
+					map.addCover(data[0])
+				})
+
+				$(document).on('click', '#btn2', function() {
+					map.removeAllCovers()
+					map.addCover(data[1])
+				})
+				$(document).on('click', '#btn3', function() {
+					map.removeAllCovers()
+					map.addCover(data[2])
+				})
+			})
+
+
+		})
+	</script>
+</head>
+<body>
+<button id="btn2">第二个</button>
+<button id="btn3">第三个</button>
+	<div id="map-container"></div>
+</body>
+</html>

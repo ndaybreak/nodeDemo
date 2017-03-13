@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>闭包</title>
+	<style>
+		button {
+			margin-right: 50px;
+		}
+	</style>
+	<script src="../jslib/jquery.js"></script>
+	<script>
+		$(function() {
+			var obj = {name: 'xxx'}
+			for(var i = 0; i < 3; i++) {
+				obj.index = i;
+				(function(o, index) {
+					$('#btn' + index).on('click', function() {
+						console.log(index + '~' + o.index)
+					})
+				})(obj, i)
+			}
+		})
+	</script>
+</head>
+<body>
+	<button id="btn0">1111</button>
+	<button id="btn1">2222</button>
+	<button id="btn2">333333</button>
+</body>
+</html>
