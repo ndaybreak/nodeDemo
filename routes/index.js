@@ -14,6 +14,13 @@ router.get('/', function(req, res, next) {
   res.render('index');
 });
 
+router.get('/info', function(req, res, next) {
+  // res.send('index');
+  setTimeout(function() {
+        res.json({name: 'xiaoming'})
+  }, 3000)
+
+});
 
 
 
