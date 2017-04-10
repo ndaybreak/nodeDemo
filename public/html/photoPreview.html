@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Phone Preview</title>
+	<script src="../jslib/jquery.js"></script>
+	<style>
+		a {
+			    text-decoration: none;
+		}
+		/*// need delete*/
+		.popup-close {
+		    font-size: 1.2rem;
+		    color: #c1c1c1;
+		    float: right;
+		    margin: 0;
+		    color: #fff;
+		}
+
+
+
+
+		.hide {
+			display: none;
+		}
+		.photo-cont * {
+			box-sizing: border-box;
+		}
+		.photo-bg {
+			position: fixed;
+		    top: 0;
+		    bottom: 0;
+		    left: 0;
+		    right: 0;
+		    background-color: rgba(0, 0, 0, .6);
+		    z-index: 100;
+		}
+		.photo-wrap {
+			background-color: black;
+		    position: fixed;
+		    top: 5%;
+		    bottom: 5%;
+		    left: 15%;
+		    right: 15%;
+		    min-width: 500px;
+		        z-index: 101;
+		}
+		.thumb-ctn {
+			list-style: none;
+			    overflow: hidden;
+    padding: 0;
+    margin: 0;
+        float: left;
+    margin-left: -50%;
+		}
+		.thumb-item {
+			float: left;
+		    width: 50px;
+		    height: 50px;
+		    overflow: hidden;
+		        margin-right: 5px;
+		}
+		.thumb-link,
+		.thumb-img {
+			    float: left;
+			width: 50px;
+			height: 50px;
+		}
+		.active .thumb-link {
+		    border: 5px solid rgb(115, 180, 224);
+    		overflow: hidden;
+		}
+
+
+		.photo-title {
+			    position: relative;
+			height: 30px;
+			    z-index: 501;
+		}
+		.photo-content {
+			    position: relative;
+			height: 100%;
+			margin-top: -30px;
+			    padding-top: 30px;
+			        /*padding: 30px 40px 60px 40px;*/
+			padding-bottom: 60px;
+			    z-index: 500;
+			    background-clip: content-box;
+
+			        background-image: url(../img/1.jpg);
+    background-repeat: no-repeat;
+    
+    background-position: center;
+		}
+		.thumb-list {
+			    position: relative;
+			margin-top: -60px;
+			padding: 5px 0;
+			    float: left;
+    margin-left: 50%;
+        z-index: 501;
+		}
+		.photo-prev {
+    border: 20px solid transparent;
+    border-right-color: rgba(255, 255, 255, .3);
+        position: absolute;
+        top: 50%;
+    left: -5px;
+		}
+		.photo-next {
+    border: 20px solid transparent;
+    border-left-color: rgba(255, 255, 255, .3);
+        position: absolute;
+    top: 50%;
+        right: -5px;
+		}
+		/*.photo-delete {
+			    text-decoration: none;
+    position: absolute;
+    bottom: 90px;
+    left: 50%;
+    color: rgba(255, 255, 255, .3);
+		}*/
+		.photo-prev:hover {
+			border-right-color: rgba(255, 255, 255, 1);
+		}
+		.photo-next:hover {
+			border-left-color: rgba(255, 255, 255, 1);
+		}
+		/*.photo-delete:hover {
+			color: rgba(255, 255, 255, 1);
+		}*/
+		.photo-loading {
+			    position: absolute;
+		    top: 0;
+		    bottom: 0;
+		    left: 0;
+		    right: 0;
+		    z-index: 600;
+		    background-color: rgba(0, 0, 0, 0.1);
+		}
+		.photo-loading img {
+			    position: relative;
+    top: 50%;
+    left: 46%;
+		}
+
+		.photo-delete-tip {
+			    border: 5px solid #ccc;
+			    border-radius: 4px;
+			    height: auto;
+			    background: #fff;
+			    z-index: 605;
+			    position: fixed;
+			    text-align: center;
+			    font-size: 1rem;
+			    padding: 0 0 15px 0;
+			        top: 40%;
+    left: 44%;
+			    width: 240px;
+		}
+		.tip-title {
+			text-align: left;
+		    background: #27405b;
+		    padding: 10px;
+		    color: #fff;
+		    margin-bottom: 15px;
+		}
+		.tip-content {
+			        padding: 15px 0 25px 0;
+		}
+
+		.oper-btn .confirm {
+		    display: inline-block;
+		    color: #fff;
+		    background-color: #27405b;
+		    padding: 0 10px;
+		    line-height: 26px;
+		    font-size: 13px;
+		    border: 1px solid #27405b;
+		    /* font-weight: bold; */
+		    border-radius: 2px;
+	    }
+	    .oper-btn .cancel {
+	    	    display: inline-block;
+    /* color: #fff; */
+    /* background-color: #e55a5f; */
+    padding: 0 10px;
+    line-height: 26px;
+    font-size: 13px;
+        border: 1px solid #27405b;
+    border-radius: 2px;
+	    }
+	    .photo-oper-wrap {
+    	    position: absolute;
+		    bottom: 60px;
+		    width: 100%;
+		    padding: 5px 0;
+		    background-color: rgba(0, 0, 0, .6);
+		    z-index: 505;
+		    text-align: right;
+		    padding-right: 60px;
+	    }
+	</style>
+
+	<script>
+		$(function() {
+			$(document).on('click', '.thumb-item', function() {
+				var $this = $(this),
+					url
+				if($this.hasClass('active')) {
+					return
+				}
+				$this.siblings().removeClass('active')
+				$this.addClass('active')
+				url = $this.find('.thumb-img').prop('src')
+				$('#photoContent').css('background-image', 'url('+ url +')')
+			})
+			$(document).on('click', '#photoPrev', function() {
+				var activeItem = $('#thumbCtn > .active'),
+					newItem = activeItem.prev()
+
+				if(!newItem.length) {
+					newItem = activeItem.siblings().last()
+				}
+				activeItem.removeClass('active')
+				newItem.addClass('active')
+				$('#photoContent').css('background-image', 'url('+ newItem.find('.thumb-img').prop('src') +')')
+			})
+			$(document).on('click', '#photoNext', function() {
+				var activeItem = $('#thumbCtn > .active'),
+					newItem = activeItem.next()
+
+				if(!newItem.length) {
+					newItem = activeItem.siblings().first()
+				}
+				activeItem.removeClass('active')
+				newItem.addClass('active')
+				$('#photoContent').css('background-image', 'url('+ newItem.find('.thumb-img').prop('src') +')')
+			})
+			// $(document).on('click', '#photoBg', function() {
+			// 	$(this).addClass('hide').next().addClass('hide')
+			// })
+			$(document).on('click', '.photo-delete-tip .cancel', function() {
+				hideDeleteTip()
+			})
+			$(document).on('click', '#photoDelete', function() {
+				var phoneId = $('#thumbCtn > .active').data('id')
+				showDeleteTip()
+			})
+			$(document).on('click', '#tipConfirm', function() {
+				showLoading()
+				setTimeout(function() {
+					var activeItem = $('#thumbCtn > .active')
+					if($('#thumbCtn > *').length > 1) {
+						$('#photoNext').click()
+						activeItem.remove()
+						hideLoading()
+					} else {
+						clearPhotoCont()
+					}
+					
+				}, 500)
+			})
+
+
+
+
+
+			function clearPhotoCont() {
+				$('#photoCont').addClass('hide')
+				$('#thumbCtn').html('')
+			}
+			function showLoading() {
+				$('#photoLoading').removeClass('hide')
+				$('#phoneDeleteTip').addClass('hide')
+			}
+			function hideLoading() {
+				$('#photoLoading').addClass('hide')
+			}
+			function showDeleteTip() {
+				$('#photoLoading').removeClass('hide')
+				$('#phoneDeleteTip').removeClass('hide')
+			}
+			function hideDeleteTip() {
+				$('#photoLoading').addClass('hide')
+				$('#phoneDeleteTip').addClass('hide')
+			}
+		})
+	</script>
+</head>
+<body>
+	
+
+	<div class="photo-cont" id="photoCont">
+		<div class="photo-bg" id="photoBg"></div>
+		<div class="photo-wrap">
+			<div class="photo-title">
+				<a href="javascript:">X</a>
+			</div>
+			<div class="photo-content" id="photoContent">
+				<a href="javascript:" class="photo-prev" id="photoPrev"></a>
+				<a href="javascript:" class="photo-next" id="photoNext"></a>
+			</div>
+			<div class="photo-oper-wrap">
+				<a href="javascript:" class="photo-delete" id="photoDelete" title="删除"><i class="fa fa-trash-o" aria-hidden="true">del</i></a>
+			</div>
+			<div class="thumb-list">
+				<ul class="thumb-ctn" id="thumbCtn">
+					<li class="thumb-item active" data-id="1"><a class="thumb-link" href="javascript:"><img class="thumb-img" src="../img/1.jpg" alt=""></a></li>
+					<li class="thumb-item" data-id="2"><a class="thumb-link" href="javascript:"><img class="thumb-img" src="../img/2.jpg" alt=""></a></li>
+					<li class="thumb-item" data-id="3"><a class="thumb-link" href="javascript:"><img class="thumb-img" src="../img/3.jpg" alt=""></a></li>
+					<li class="thumb-item" data-id="4"><a class="thumb-link" href="javascript:"><img class="thumb-img" src="../img/4.jpg" alt=""></a></li>
+					<li class="thumb-item" data-id="4"><a class="thumb-link" href="javascript:"><img class="thumb-img" src="../img/index.jpg" alt=""></a></li>
+					<li class="thumb-item" data-id="4"><a class="thumb-link" href="javascript:"><img class="thumb-img" src="../img/广州港平台首页.jpg" alt=""></a></li>
+					<li class="thumb-item" data-id="4"><a class="thumb-link" href="javascript:"><img class="thumb-img" src="../img/vehicle_icon.png" alt=""></a></li>
+				</ul>
+			</div>
+
+			<div class="photo-loading hide" id="photoLoading">
+				<img src="../img/loading.gif" alt="loading" style="width: 40px; height: 40px">
+			</div>
+			<div class="photo-delete-tip hide" id="phoneDeleteTip">
+				<div class="tip-title">
+					提示
+					<a href="javascript:void(0);" class="popup-close cancel"><i class="fa fa-remove"></i>x</a>
+				</div>
+				<div class="tip-content">
+					确定删除图片？
+				</div>
+				<div class="oper-btn">
+					<a href="javascript:" class="cancel">取消</a>
+					<a href="javascript:" class="confirm" id="tipConfirm">确定</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
