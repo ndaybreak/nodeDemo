@@ -1,674 +1,868 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>Phone Preview</title>
-	<script src="../jslib/jquery.js"></script>
-	<style>
-		a {
-			    text-decoration: none;
-		}
-		/*// need delete*/
-		.popup-close {
-		    font-size: 1.2rem;
-		    color: #c1c1c1;
-		    float: right;
-		    margin: 0;
-		    color: #fff;
-		}
+    <meta charset="UTF-8">
+    <title>Phone Preview</title>
+    <script src="../jslib/jquery.js"></script>
+    <style>
+        /**************photo part start *****************/
+        .photo-content img {
+            max-width: none;
+        }
+        .hide {
+            display: none !important;
+        }
+        .photo-cont * {
+            box-sizing: border-box;
+        }
+        .photo-bg {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(0, 0, 0, .6);
+            z-index: 10010;
+        }
+        .photo-wrap {
+            background-color: black;
+            position: fixed;
+            top: 5%;
+            bottom: 5%;
+            left: 15%;
+            right: 15%;
+            min-width: 500px;
+            z-index: 10011;
+        }
+        .thumb-ctn {
+            position: relative;
+            list-style: none;
+            overflow: hidden;
+            padding: 0;
+            margin: 0 auto;
+            left: 0;
+            transition: left 0.7s ease;
+            /*float: left;*/
+            /*margin-left: -50%;*/
+        }
+        .thumb-item {
+            float: left;
+            width: 50px;
+            height: 50px;
+            overflow: hidden;
+            margin-right: 5px;
+        }
+        .thumb-link,
+        .thumb-img {
+            float: left;
+            width: 50px;
+            height: 50px;
+        }
+        .active .thumb-link {
+            border: 5px solid rgb(115, 180, 224);
+            overflow: hidden;
+        }
 
 
+        .photo-title {
+            position: relative;
+            height: 30px;
+            z-index: 10501;
+        }
+        .photo-content {
+            position: relative;
+            height: 100%;
+            margin-top: -30px;
+            padding-top: 30px;
+            padding-bottom: 60px;
+            z-index: 10500;
+        }
+        .thumb-list {
+            position: relative;
+            margin-top: -60px;
+            padding: 5px 0px;
+            /*float: left;*/
+            /*margin-left: 50%;*/
+            z-index: 10501;
+            overflow: hidden;
+            margin-left: 50px;
+            margin-right: 50px;
+        }
+        .thumb-list:after,
+        .thumb-ctn:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+        .photo-prev {
+            background-image: url('../img/photo-preview.png');
+            background-position: -60px 0;
+            position: absolute;
+            top: 45%;
+            left: 10px;
+            width: 27px;
+            height: 44px;
+        }
+        .photo-next {
+            background-image: url('../img/photo-preview.png');
+            background-position: -92px 0;
+            position: absolute;
+            top: 45%;
+            right: 10px;
+            width: 27px;
+            height: 44px;
+        }
+        .photo-prev:hover {
+            background-position: -120px 0;
+        }
+        .photo-next:hover {
+            background-position: -150px 0;
+        }
+        .photo-loading {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 10600;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        .photo-loading img {
+            position: relative;
+            top: 50%;
+            left: 46%;
+        }
+
+        .photo-delete-tip {
+            border-radius: 1px;
+            z-index: 10605;
+            position: absolute;
+            text-align: center;
+            font-size: 1rem;
+            bottom: 100px;
+            right: 44px;
+            width: 400px;
+            height: 32px;
+            padding: 0 5px;
+            background-color: #FFFAE2;
+            border: 1px solid #F5E190;
+            color: #616161;
+        }
+        .photo-delete-tip a {
+            display: inline-block;
+            font-size: 12px;
+            width: 48px;
+            height: 22px;
+            line-height: 21px;
+            border: 1px solid #F1D35A;
+            margin-left: 5px;
+            color: #AA4501;
+            text-align: center;
+            background-color: #FFEFA2;
+            border-radius: 2px;
+        }
+        .photo-delete-tip a:hover {
+            box-shadow: 0 0 5px rgb(255, 211, 3);
+        }
+        .photo-delete-tip .oper-btn {
+            float: right;
+            line-height: 30px;
+        }
+        /*.tip-title {*/
+        /*text-align: left;*/
+        /*background: #27405b;*/
+        /*padding: 10px;*/
+        /*color: #fff;*/
+        /*margin-bottom: 15px;*/
+        /*}*/
+        .tip-content {
+            float: left;
+            padding-left: 10px;
+            line-height: 0px;
+        }
+
+        .oper-btn .confirm {
+            font-weight: bold;
+        }
+        .photo-oper-wrap {
+            position: absolute;
+            bottom: 60px;
+            width: 100%;
+            padding: 5px 0;
+            background-color: rgba(0, 0, 0, .6);
+            z-index: 10505;
+            text-align: right;
+            padding-right: 50px;
+        }
+        .close-photo-cont {
+            width: 30px;
+            display: inline-block;
+            height: 30px;
+            line-height: 27px;
+            /*border: 2px solid white;*/
+            /*border-radius: 100%;*/
+            text-align: center;
+            /*background-color: #777777;*/
+            position: absolute;
+            right: -10px;
+            top: -10px;
+            color: white;
+            background-image: url('../img/photo-preview.png');
+            background-position: -134px -46px;
+        }
+        .close-photo-cont:hover {
+            background-position: -166px -46px;
+        }
+
+        .img-wrap {
+            position: relative;
+            height: 100%;
+            overflow: hidden;
+        }
+        .img-target {
+            position: absolute;
+            user-select: none;
+        }
+        .max-size-frozen {
+            max-width: 100%;
+            max-height: 100%;
+        }
+        .rotate {
+            transition: transform 0.2s linear;
+            -webkit-transition: -webkit-transform 0.2s linear;
+            -moz-transition: -moz-transform 0.2s linear;
+            -o-transition: -o-transform 0.2s linear;
+            -ms-transition: -ms-transform 0.2s linear;
+        }
 
 
-		.hide {
-			display: none;
-		}
-		.photo-cont * {
-			box-sizing: border-box;
-		}
-		.photo-bg {
-			position: fixed;
-		    top: 0;
-		    bottom: 0;
-		    left: 0;
-		    right: 0;
-		    background-color: rgba(0, 0, 0, .6);
-		    z-index: 100;
-		}
-		.photo-wrap {
-			background-color: black;
-		    position: fixed;
-		    top: 5%;
-		    bottom: 5%;
-		    left: 15%;
-		    right: 15%;
-		    min-width: 500px;
-		        z-index: 101;
-		}
-		.thumb-ctn {
-			list-style: none;
-			    overflow: hidden;
-    padding: 0;
-    margin: 0;
-        float: left;
-    margin-left: -50%;
-		}
-		.thumb-item {
-			float: left;
-		    width: 50px;
-		    height: 50px;
-		    overflow: hidden;
-		        margin-right: 5px;
-		}
-		.thumb-link,
-		.thumb-img {
-			    float: left;
-			width: 50px;
-			height: 50px;
-		}
-		.active .thumb-link {
-		    border: 5px solid rgb(115, 180, 224);
-    		overflow: hidden;
-		}
+        .photo-oper-wrap > * {
+            margin-left: 20px;
+        }
+        .icon-m {
+            display: inline-block;
+            font-size: 0;
+            width: 16px;
+            height: 16px;
+            background-image: url('../img/photo-preview.png');
+            background-repeat: no-repeat;
+            opacity: 0.6;
+        }
+        .icon-delete {
+            width: 15px;
+            height: 17px;
+            background-position: -440px 0px;
+        }
+        .icon-rotate {
+            width: 18px;
+            height: 18px;
+            background-position: -346px -40px;
+        }
+        .icon-min {
+            width: 23px;
+            height: 22px;
+            position: relative;
+            top: 4px;
+            background-position: -261px -54px;
+        }
+        .icon-max {
+            width: 23px;
+            height: 22px;
+            position: relative;
+            top: 4px;
+            background-position: -259px 0;
+        }
+        .icon-m:hover {
+            opacity: 1;
+        }
+        .photo-move-area {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            cursor: move;
+            -webkit-user-select:none;-moz-user-select:none;-o-user-select:none;user-select:none;
+        }
+        .upload-success-tip {
+            position: absolute;
+            top: 63px;
+            left: 340px;
+            padding: 15px 30px;
+            color: yellow;
+            border-radius: 3px;
+            background-color: rgba(60, 118, 61, 0);
+            transition: background-color 2s ease-out;
+        }
+        .upload-warning-tip {
+            position: absolute;
+            top: 63px;
+            left: 340px;
+            padding: 15px 30px;
+            color: yellow;
+            border-radius: 3px;
+            background-color: rgba(138, 109, 59, 0);
+            transition: background-color 2s ease-out;
+        }
+        .upload-fade-in {
+            background-color: rgba(60, 118, 61, 1);
+        }
+        .upload-warning-fade-in {
+            background-color: rgba(138, 109, 59, 1);
+        }
+
+        .thumb-btn {
+            position: absolute;
+            display: block;
+            width: 50px;
+            height: 60px;
+            line-height: 60px;
+            bottom: 0;
+            color: rgba(255, 255, 255, .5);
+            font-size: 18px;
+            cursor: pointer;
+            z-index: 12000;
+            text-align: center;
+        }
+        .thumb-btn:hover {
+            color: rgba(255, 255, 255, .8);
+        }
+        .thumb-btn i {
+            width: 32px;
+            display: inline-block;
+            height: 32px;
+            margin-top: 15px;
+        }
+        .thumb-prev {
+            left: 0;
+        }
+        .thumb-prev i {
+            background: url('../img/photo-preview.png')  -0px -76px;
+        }
+        .thumb-next {
+            right: 0;
+        }
+        .thumb-next i {
+            background: url('../img/photo-preview.png')  -32px -76px;
+        }
+
+        /**************photo part end *****************/
+    </style>
+
+    <script>
+        $(function () {
+            var photoPart = {
+                viewBtn: '',
+                init: function() {
+                    var imgWrap = $('#imgWrap'),
+                            img = $('#imgTarget'),
+                            oImg = $('#oImg'),
+                            moving = false,
+                            moveStep = 300
+
+                    // 切换缩略图
+                    $(document).on('click', '.thumb-item', function() {
+                        var $this = $(this),
+                                url
+                        if($this.hasClass('active')) {
+                            return
+                        }
+                        $this.siblings().removeClass('active')
+                        $this.addClass('active')
+                        url = $this.find('.thumb-img').prop('src')
+                        img.prop('src', url)
+                        oImg.prop('src', url)
+                        img.css('opacity', 0)
+                        clearRotate()
+                        resetChangeSize()
+                        setThumbPosition()
+                    })
+
+                    // 上一张
+                    $(document).on('click', '#photoPrev', function() {
+                        var activeItem = $('#thumbCtn > .active'),
+                                newItem = activeItem.prev(),
+                                url
+
+                        if(!newItem.length) {
+                            newItem = activeItem.siblings().last()
+                        }
+                        if(!newItem.length) {
+                            return
+                        }
+                        newItem.trigger('click')
+//                        activeItem.removeClass('active')
+//                        newItem.addClass('active')
+//                        url = newItem.find('.thumb-img').prop('src')
+//                        img.prop('src', url)
+//                        oImg.prop('src', url)
+//                        img.css('opacity', 0)
+//                        clearRotate()
+//                        resetChangeSize()
+//                        setThumbPosition()
+                    })
+
+                    // 下一张
+                    $(document).on('click', '#photoNext', function() {
+                        var activeItem = $('#thumbCtn > .active'),
+                                newItem = activeItem.next(),
+                                url
+
+                        if(!newItem.length) {
+                            newItem = activeItem.siblings().first()
+                        }
+                        if(!newItem.length) {
+                            return
+                        }
+                        newItem.trigger('click')
+//                        activeItem.removeClass('active')
+//                        newItem.addClass('active')
+//                        url = newItem.find('.thumb-img').prop('src')
+//                        img.prop('src', url)
+//                        oImg.prop('src', url)
+//                        img.css('opacity', 0)
+//                        clearRotate()
+//                        resetChangeSize()
+                    })
+
+                    // 点击背景区域后隐藏
+                    // $(document).on('click', '#photoBg', function() {
+                    // 	$(this).addClass('hide').next().addClass('hide')
+                    // })
+
+                    // 删除图片
+                    $(document).on('click', '#photoDelete', function() {
+                        showDeleteTip()
+                    })
+                    // 删除图片	取消
+                    $(document).on('click', '.photo-delete-tip .cancel', function() {
+                        hideDeleteTip()
+                    })
+                    // 删除图片	确认
+                    $(document).on('click', '#tipConfirm', function() {
+                        showLoading()
+                        var activeItem = $('#thumbCtn > .active'),
+                                para = {
+                                    fileId: activeItem.data('id'),
+                                    containerId: scope.containerId,
+                                    itemId: activeItem.data('itemid')
+                                }
+
+                        ES.util.ajax_submit('/abnormal_charge/voucher/del',para, function() {
+                            processViewBtn(para.fileId)
+                            if($('#thumbCtn > *').length > 1) {
+                                $('#photoNext').click()
+                                activeItem.remove()
+                                clearRotate()
+                                resetChangeSize()
+                                hideLoading()
+                            } else {
+                                $('#closePhotoCont').trigger('click')
+                            }
+                        })
+                    })
+
+                    function processViewBtn(fileId) {
+                        var viewBtn = scope.photoPart.viewBtn,
+                                paths = viewBtn.data('paths'),
+                                removeIndex
+                        for(var i = 0, len = paths.length; i < len; i++) {
+                            if(fileId == paths[i].fileId) {
+                                removeIndex = i
+                                break
+                            }
+                        }
+                        paths.splice(removeIndex, 1)
+                        if(!paths.length) {
+                            viewBtn.addClass('hide')
+                        }
+                    }
+
+                    // 关闭窗口
+                    $(document).on('click', '#closePhotoCont', function() {
+                        clearRotate()
+                        clearPhotoCont()
+                        hideLoading()
+                        hideDeleteTip()
+                        resetChangeSize()
+                    })
+
+                    $('#photoContent').hover(function() {
+                        $('#photoOperCont').removeClass('hide')
+                    }, function() {
+                        if($('#phoneDeleteTip').hasClass('hide')) {
+                            $('#photoOperCont').addClass('hide')
+                        }
+                    })
 
 
-		.photo-title {
-			    position: relative;
-			height: 30px;
-			    z-index: 501;
-		}
-		.photo-content {
-			    position: relative;
-			height: 100%;
-			margin-top: -30px;
-			    padding-top: 30px;
-			padding-bottom: 60px;
-			    z-index: 500;
-		}
-		.thumb-list {
-			    position: relative;
-			margin-top: -60px;
-			padding: 5px 0;
-			    float: left;
-    margin-left: 50%;
-        z-index: 501;
-		}
-		.photo-prev {
-		    background-image: url(../img/photo-preview.png);
-		    background-position: -60px 0;
-		    position: absolute;
-		    top: 45%;
-		    left: 10px;
-		    width: 27px;
-		    height: 44px;
-		}
-		.photo-next {
-    		background-image: url(../img/photo-preview.png);
-		    background-position: -92px 0;
-		    position: absolute;
-		    top: 45%;
-		    right: 10px;
-		    width: 27px;
-		    height: 44px;
-		}
-		.photo-prev:hover {
-			    background-position: -120px 0;
-		}
-		.photo-next:hover {
-			    background-position: -150px 0;
-		}
-		.photo-loading {
-			    position: absolute;
-		    top: 0;
-		    bottom: 0;
-		    left: 0;
-		    right: 0;
-		    z-index: 600;
-		    background-color: rgba(0, 0, 0, 0.5);
-		}
-		.photo-loading img {
-			    position: relative;
-    top: 50%;
-    left: 46%;
-		}
+                    // 旋转图片
+                    var rotateIndex = 1
+                    $(document).on('click', '#photoRotate', function() {
+                        img.addClass('rotate')
+                        img.css('transform', 'rotate(' + rotateIndex*90 + 'deg)')
+                        rotateIndex++
+                        adjustImgPosition()
+                    })
 
-		.photo-delete-tip {
-			    border: 5px solid #ccc;
-			    border-radius: 4px;
-			    height: auto;
-			    background: #fff;
-			    z-index: 605;
-			    position: fixed;
-			    text-align: center;
-			    font-size: 1rem;
-			    padding: 0 0 15px 0;
-			        top: 40%;
-    			left: 44%;
-			    width: 240px;
-		}
-		.tip-title {
-			text-align: left;
-		    background: #27405b;
-		    padding: 10px;
-		    color: #fff;
-		    margin-bottom: 15px;
-		}
-		.tip-content {
-			        padding: 15px 0 25px 0;
-		}
+                    // 放大 縮小
+                    $(document).on('click', '#photoChangeSize', function() {
+                        var $this = $(this),
+                                target = $this.find('.icon-m')
+                        if(target.hasClass('icon-max')) { // 放大
+                            $this.attr('title', '点击缩小')
+                            target.removeClass('icon-max').addClass('icon-min')
+                            img.removeClass('max-size-frozen')
+                            img.css({width: oImg.prop('naturalWidth') + 'px', height: oImg.prop('naturalHeight') + 'px'})
+                            $('#photoMoveArea').removeClass('hide')
+                            adjustImgPosition()
+                        } else {
+                            $this.attr('title', '点击放大')
+                            target.removeClass('icon-min').addClass('icon-max')
+                            img.addClass('max-size-frozen')
+                            $('#photoMoveArea').addClass('hide')
+                            adjustImgPosition()
+                        }
+                    })
 
-		.oper-btn .confirm {
-		    display: inline-block;
-		    color: #fff;
-		    background-color: #27405b;
-		    padding: 0 10px;
-		    line-height: 26px;
-		    font-size: 13px;
-		    border: 1px solid #27405b;
-		    border-radius: 2px;
-	    }
-	    .oper-btn .cancel {
-	    	    display: inline-block;
-    padding: 0 10px;
-    line-height: 26px;
-    font-size: 13px;
-        border: 1px solid #27405b;
-    border-radius: 2px;
-	    }
-	    .photo-oper-wrap {
-    	    position: absolute;
-		    bottom: 60px;
-		    width: 100%;
-		    padding: 5px 0;
-		    background-color: rgba(0, 0, 0, .6);
-		    z-index: 505;
-		    text-align: right;
-		    padding-right: 50px;
-	    }
-	    .close-photo-cont {
-	    	    width: 30px;
-		    display: inline-block;
-		    height: 30px;
-		    line-height: 27px;
-		    border: 2px solid white;
-		    border-radius: 100%;
-		    text-align: center;
-		    background-color: #777777;
-		    position: absolute;
-		    right: -10px;
-		    top: -10px;
-		    color: white;
-		    transition: background-color 0.2s ease;
-	    }
-	    .close-photo-cont:hover {
-background-color: #246AB0;
-	    }
+                    // 移动图片
+                    var moveStartX,
+                            moveStartY,
+                            oLeft,
+                            oTop
+                    $('#photoMoveArea').on('mousemove', function(e) {
+                        if(!moving) {
+                            return
+                        }
 
-		.img-wrap {
-			position: relative;
-			height: 100%;
-			overflow: hidden;
-		}
-	    .img-target {
-	    	position: absolute;
-	    }
-	    .max-size-frozen {
-			max-width: 100%;
-			max-height: 100%;
-	    }
-	    .rotate {
-	    	transition: transform 0.2s linear;
-		    -webkit-transition: -webkit-transform 0.2s linear;
-		    -moz-transition: -moz-transform 0.2s linear;
-		    -o-transition: -o-transform 0.2s linear;
-		    -ms-transition: -ms-transform 0.2s linear;
-	    }
+                        var left = oLeft + e.clientX - moveStartX,
+                                top = oTop + e.clientY - moveStartY,
+                                isRotated = !(rotateIndex%2),
+                                bWidth = imgWrap.width(),
+                                bHeight = imgWrap.height(),
+                                sWidth = img.width(),
+                                sHeight = img.height(),
+                                minHeight,
+                                minWidth,
+                                maxTop,
+                                maxLeft
+
+                        if(!isRotated) {
+                            if(sHeight > bHeight) {
+                                minHeight = bHeight - sHeight
+                                top = top > 0 ? 0 : top
+                                top = top < minHeight ? minHeight : top
+                                img.css('top', top  + 'px')
+                            }
+                            if(sWidth > bWidth) {
+                                minWidth = bWidth - sWidth
+                                left = left > 0 ? 0 : left
+                                left = left < minWidth ? minWidth : left
+                                img.css('left', left  + 'px')
+                            }
+                        } else {
+                            if(sWidth > bHeight) {
+                                maxTop = (sWidth - sHeight)/2
+                                minHeight = bHeight - (sHeight + sWidth)/2
+                                top = top > maxTop ? maxTop : top
+                                top = top < minHeight ? minHeight : top
+                                img.css('top', top  + 'px')
+                            }
+                            if(sHeight > bWidth) {
+                                maxLeft = (sHeight - sWidth)/2
+                                minWidth = 2*maxLeft
+                                left = left > maxLeft ? maxLeft : left
+                                left = left < minWidth ? minWidth : left
+                                img.css('left', left  + 'px')
+                            }
+                        }
+                    }).on('mousedown', function(e) {
+                        moving = true
+                        moveStartX = e.clientX
+                        moveStartY = e.clientY
+
+                        var top = img.css('top'),
+                                left = img.css('left')
+
+                        oTop = parseFloat(top.substring(0, top.length-2))
+                        oLeft = parseFloat(left.substring(0, left.length-2))
+                    }).on('mouseup blur', function(e) {
+                        moving = false
+                    })
 
 
-		.photo-oper-wrap > * {
-			margin-left: 20px;
-		}
-	    .icon-m {
-		    display: inline-block;
-		    font-size: 0;
-		    width: 16px;
-		    height: 16px;
-		    background-image: url('../img/photo-preview.png');
-		    background-repeat: no-repeat;
-		    opacity: 0.6;
-		}
-	    .icon-delete {
-	    	width: 15px;
-	    	height: 17px;	
-			    background-position: -440px 0px;
-	    }
-	    .icon-rotate {
-	    	width: 18px;
-	    	height: 18px;
-			    background-position: -346px -40px;
-	    }
-	    .icon-min {
-	    	width: 23px;
-    height: 22px;
-        position: relative;
-    top: 4px;
-    		background-position: -261px -54px;
-	    }
-	    .icon-max {
-			        width: 23px;
-    height: 22px;
-        position: relative;
-    top: 4px;
-    background-position: -259px 0;
-	    }
-	    .icon-m:hover {
-			opacity: 1;
-	    }
-	    .photo-move-area {
-	    	position: absolute;
-	    	top: 0;
-	    	left: 0;
-	    	bottom: 0;
-	    	right: 0;
-		    cursor: move;
-		    -webkit-user-select:none;-moz-user-select:none;-o-user-select:none;user-select:none;
-	    }
-	</style>
+                    // 缩略图 向前
+                    $(document).on('click', '#thumbPrev', function() {
+                        var $thumbCtn = $('#thumbCtn'),
+                            oldLeft = $thumbCtn.position().left,
+                            left = oldLeft + moveStep
 
-	<script>
-		$(function() {
-			var imgWrap = $('#imgWrap'),
-				img = $('#imgTarget'),
-				oImg = $('#oImg'),
-				moving = false
+                        left = left > 0 ? 0 : left
+                        $thumbCtn.css('left', left + 'px')
+                        checkThumbOperDisplay()
+                    })
 
-			// 切换缩略图
-			$(document).on('click', '.thumb-item', function() {
-				var $this = $(this),
-					url
-				if($this.hasClass('active')) {
-					return
-				}
-				$this.siblings().removeClass('active')
-				$this.addClass('active')
-				url = $this.find('.thumb-img').prop('src')
-				img.prop('src', url)
-				oImg.prop('src', url)
-				img.css('opacity', 0)
-				clearRotate()
-				resetChangeSize()
-			})
+                    // 缩略图 向后
+                    $(document).on('click', '#thumbNext', function() {
+                        var $thumbCtn = $('#thumbCtn'),
+                            oldLeft = $thumbCtn.position().left,
+                            left = oldLeft - moveStep
 
-			// 上一张
-			$(document).on('click', '#photoPrev', function() {
-				var activeItem = $('#thumbCtn > .active'),
-					newItem = activeItem.prev(),
-					url
+                        $thumbCtn.css('left', left + 'px')
+                        checkThumbOperDisplay()
+                    })
 
-				if(!newItem.length) {
-					newItem = activeItem.siblings().last()
-				}
-				activeItem.removeClass('active')
-				newItem.addClass('active')
-				url = newItem.find('.thumb-img').prop('src')
-				img.prop('src', url)
-				oImg.prop('src', url)
-				img.css('opacity', 0)
-				clearRotate()
-				resetChangeSize()
-			})
+                    window.onresize = function() {
+                        adjustImgPosition()
+                    }
 
-			// 下一张
-			$(document).on('click', '#photoNext', function() {
-				var activeItem = $('#thumbCtn > .active'),
-					newItem = activeItem.next(),
-					url
+                    /**
+                     *　调整图片尺寸和位置。
+                     *　图片旋转后，如果图片尺寸不变，则偏移量不变，旋转不会改变图片的中心点；
+                     *　若图片尺寸改变，需要重新设置偏移量。
+                     */
+                    function adjustImgPosition() {
+                        var isRotated = !(rotateIndex%2),
+                                oWidth = oImg.prop('naturalWidth'),
+                                oHeight = oImg.prop('naturalHeight'),
+                                bWidth = imgWrap.width(),
+                                bHeight = imgWrap.height(),
+                                sWidth,
+                                sHeight,
+                                left,
+                                top,
+                                isBig = $('#photoChangeSize .icon-m').hasClass('icon-min'),
+                                isSmall = false
 
-				if(!newItem.length) {
-					newItem = activeItem.siblings().first()
-				}
-				activeItem.removeClass('active')
-				newItem.addClass('active')
-				url = newItem.find('.thumb-img').prop('src')
-				img.prop('src', url)
-				oImg.prop('src', url)
-				img.css('opacity', 0)
-				clearRotate()
-				resetChangeSize()
-			})
+                        if(!isBig) { // 图片没有放大的情况下, 处理图片的尺寸和偏移量
+                            // 先设置图片尺寸 然后设置偏移量。
+                            if(!isRotated) { // 图片没有被旋转
+                                if(oWidth > bWidth || oHeight > bHeight) {
+                                    if(oWidth/oHeight > bWidth/bHeight) {
+                                        img.height('auto')
+                                        img.width(bWidth)
+                                    } else {
+                                        img.height(bHeight)
+                                        img.width('auto')
+                                    }
+                                    isSmall = true
+                                } else {
+                                    img.width(oWidth)
+                                    img.height(oHeight)
+                                }
+                            } else {
+                                if(oHeight > bWidth || oWidth > bHeight) {
+                                    if(oHeight/oWidth > bWidth/bHeight) {
+                                        img.height(bWidth)
+                                        img.width('auto')
+                                    } else {
+                                        img.height('auto')
+                                        img.width(bHeight)
+                                    }
+                                    isSmall = true
+                                } else {
+                                    img.width(oWidth)
+                                    img.height(oHeight)
+                                }
+                            }
+                            sWidth = img.width()
+                            sHeight = img.height()
+                            left = (bWidth - sWidth)/2
+                            top = (bHeight - sHeight)/2
+                            img.css('top', top + 'px')
+                            img.css('left', left + 'px')
+                        } else { // 图片放大的情况下，只需处理图片的偏移量; 图片旋转后水平方向上仍需要居中，因此当设置left时不用考虑是否旋转（因为旋转不会改变中心点）
+                            sWidth = img.width()
+                            sHeight = img.height()
+                            left = (bWidth - sWidth)/2
+                            if(!isRotated) {
+                                top = sHeight > bHeight ? 0 : (bHeight - sHeight)/2
+                            } else {
+                                top = sWidth > bHeight ? (sWidth - sHeight)/2 : (bHeight - sHeight)/2
+                            }
+                            img.css('top', top + 'px')
+                            img.css('left', left + 'px')
+                        }
 
-			// 点击背景区域后隐藏
-			// $(document).on('click', '#photoBg', function() {
-			// 	$(this).addClass('hide').next().addClass('hide')
-			// })
+                        if(!isBig) {
+                            if(isSmall) {
+                                $('#photoChangeSize').removeClass('hide').find('.icon-m').removeClass('icon-min').addClass('icon-max')
+                            } else {
+                                $('#photoChangeSize').addClass('hide').find('.icon-m').removeClass('icon-min').addClass('icon-max')
+                            }
+                        }
 
-			// 删除图片
-			$(document).on('click', '#photoDelete', function() {
-				var phoneId = $('#thumbCtn > .active').data('id')
-				showDeleteTip()
-			})
-			// 删除图片	取消
-			$(document).on('click', '.photo-delete-tip .cancel', function() {
-				hideDeleteTip()
-			})
-			// 删除图片	确认
-			$(document).on('click', '#tipConfirm', function() {
-				showLoading()
-				setTimeout(function() {
-					var activeItem = $('#thumbCtn > .active')
-					if($('#thumbCtn > *').length > 1) {
-						$('#photoNext').click()
-						activeItem.remove()
-						clearRotate()
-						resetChangeSize()
-						hideLoading()
-					} else {
-						clearPhotoCont()
-					}
-					
-				}, 500)
-			})
+                        checkThumbOperDisplay()
+                    }
 
-			// 关闭窗口
-			$(document).on('click', '#closePhotoCont', function() {
-				var phoneId = $('#thumbCtn > .active').data('id')
-				clearPhotoCont()
-			})
+                    function checkThumbOperDisplay() {
+                        function check() {
+                            var $wrap = $('#thumbList'),
+                                    $ctn = $('#thumbCtn'),
+                                    wrapWidth = $wrap.width(),
+                                    ctnWidth = $ctn.width(),
+                                    left = Math.abs($ctn.position().left),
+                                    ctnRightWidth = ctnWidth - left
 
-			$('#photoContent').hover(function() {
-				$('#photoOperCont').removeClass('hide')
-			}, function() {
-				$('#photoOperCont').addClass('hide')
-			})
+                            if(left) {
+                                $('#thumbPrev').removeClass('hide')
+                            } else {
+                                $('#thumbPrev').addClass('hide')
+                            }
 
+                            if(ctnRightWidth > wrapWidth) {
+                                $('#thumbNext').removeClass('hide')
+                            } else {
+                                $('#thumbNext').addClass('hide')
+                            }
+                        }
 
-			// 旋转图片
-			var rotateIndex = 1
-			$(document).on('click', '#photoRotate', function() {
-				img.addClass('rotate')
-				img.css('transform', 'rotate(' + rotateIndex*90 + 'deg)')
-				rotateIndex++
-				ajustImgPosition()
-			})
+                        setTimeout(function() {
+                            check()
+                        },800)
+                    }
+                    function setThumbPosition() {
+                        var activeItem = $('#thumbCtn > .active'),
+                                $wrap = $('#thumbList'),
+                                wrapWidth = $wrap.width(),
+                                wrapLeft = $wrap.offset().left,
+                                itemLeft = activeItem.offset().left,
+                                $ctn = $('#thumbCtn'),
+                                ctnWidth = $ctn.width()
 
-			// 放大 縮小	
-			$(document).on('click', '#photoChangeSize', function() {
-				var $this = $(this),
-					target = $this.find('.icon-m')
-				if(target.hasClass('icon-max')) { // 放大
-					$this.attr('title', '点击缩小')
-					target.removeClass('icon-max').addClass('icon-min')
-					img.removeClass('max-size-frozen')
-					img.css({width: 'auto', height: 'auto'})
-					$('#photoMoveArea').removeClass('hide')
-					ajustImgPosition()
-				} else {
-					$this.attr('title', '点击放大')
-					target.removeClass('icon-min').addClass('icon-max')
-					img.addClass('max-size-frozen')
-					$('#photoMoveArea').addClass('hide')
-					ajustImgPosition()
-				}
-			})
+                        if(!activeItem.prev().length) { // 第一个
+                            $ctn.css('left', 0)
+                            checkThumbOperDisplay()
+                        } else if(itemLeft - 80 < wrapLeft) {
+                            $('#thumbPrev').trigger('click')
+                        }
 
-			// 移动图片
-			var moveStartX,
-				moveStartY,
-				oLeft,
-				oTop
-			$('#photoMoveArea').on('mousemove', function(e) {
-				if(!moving) {
-					return
-				}
+                        if(!activeItem.next().length) { // 最后一个
+                            if(wrapWidth - ctnWidth < 0) {
+                                $ctn.css('left', (wrapWidth - ctnWidth) + 'px')
+                                checkThumbOperDisplay()
+                            }
+                        } else if(itemLeft + 100 > wrapLeft + wrapWidth) {
+                            $('#thumbNext').trigger('click')
+                        }
+                    }
 
-				var left = oLeft + e.clientX - moveStartX,
-					top = oTop + e.clientY - moveStartY,
-					isRotated = !(rotateIndex%2),
-					bWidth = imgWrap.width(),
-					bHeight = imgWrap.height(),
-					sWidth = img.width(),
-					sHeight = img.height(),
-					minHeight,
-					minWidth,
-					maxTop,
-					maxLeft
+                    function clearRotate() {
+                        img.removeClass('rotate')
+                        img.css('transform', 'rotate(0deg)')
+                        rotateIndex = 1
+                    }
+                    function clearPhotoCont() {
+                        $('#photoCont').addClass('hide')
+                        $('#thumbCtn').html('')
+                    }
+                    function showLoading() {
+                        $('#photoLoading').removeClass('hide')
+                        $('#phoneDeleteTip').addClass('hide')
+                    }
+                    function hideLoading() {
+                        $('#photoLoading').addClass('hide')
+                    }
+                    function showDeleteTip() {
+                        //$('#photoLoading').removeClass('hide')
+                        $('#phoneDeleteTip').removeClass('hide')
+                    }
+                    function hideDeleteTip() {
+                        $('#photoLoading').addClass('hide')
+                        $('#phoneDeleteTip').addClass('hide')
+                    }
+                    function resetChangeSize() {
+                        $('#photoChangeSize .icon-m').removeClass('icon-min').addClass('icon-max')
+                        $('#photoMoveArea').addClass('hide')
+                    }
 
-				if(!isRotated) {
-					if(sHeight > bHeight) {
-						minHeight = bHeight - sHeight
-						top = top > 0 ? 0 : top
-						top = top < minHeight ? minHeight : top
-						img.css('top', top  + 'px')
-					}
-					if(sWidth > bWidth) {
-						minWidth = bWidth - sWidth
-						left = left > 0 ? 0 : left
-						left = left < minWidth ? minWidth : left
-						img.css('left', left  + 'px')
-					}
-				} else {
-					if(sWidth > bHeight) {
-						maxTop = (sWidth - sHeight)/2
-						minHeight = bHeight - (sHeight + sWidth)/2
-						top = top > maxTop ? maxTop : top
-						top = top < minHeight ? minHeight : top
-						img.css('top', top  + 'px')
-					}
-					if(sHeight > bWidth) {
-						maxLeft = (sHeight - sWidth)/2
-						minWidth = 2*maxLeft
-						left = left > maxLeft ? maxLeft : left
-						left = left < minWidth ? minWidth : left
-						img.css('left', left  + 'px')
-					}
-				}
-			})
-			$('#photoMoveArea').on('mousedown', function(e) {
-				moving = true
-				moveStartX = e.clientX
-				moveStartY = e.clientY
+                    img.on('load', function() {
+                        adjustImgPosition()
+                        img.css('opacity', 1)
+                    })
+                }, show: function(viewBtn, data) {
+                    var result = [],
+                            img = $('#imgTarget'),
+                            oImg = $('#oImg')
 
-				var top = img.css('top'),
-					left = img.css('left')
+                    this.viewBtn = viewBtn
+                    $.each(data, function(i, item) {
+                        result.push('<li class="thumb-item '+ (i == 0 ? 'active' : '') +'" data-id="'+ item.id +'" data-itemid="'+ item.itemId +'"><a class="thumb-link" href="javascript:"><img class="thumb-img" src="' + item.url + '" alt=""></a></li>')
+                    })
+                    $('#thumbCtn').html(result.join('')).width(data.length*55)
 
-				oTop = parseFloat(top.substring(0, top.length-2))
-				oLeft = parseFloat(left.substring(0, left.length-2))
-			})
-			$('#photoMoveArea').on('mouseup', function(e) {
-				moving = false
-			})
-			$('#photoMoveArea').on('blur', function(e) {
-				moving = false
-			})
+                    img.prop('src', data[0].url)
+                    oImg.prop('src', data[0].url)
+                    img.css('opacity', 0)
+                    $('#photoCont').removeClass('hide')
+                    img.addClass('max-size-frozen')
+                    $('#photoMoveArea').addClass('hide')
+                }
+            }
 
-			window.onresize = function() {
-				ajustImgPosition()
-			}
+//            function initProtoPreview() {
+//                if(!$('#photoCont').length) {
+//                    $('body').append($('#photo-preview-template').html())
+//                    photoPart.init()
+//                }
+//                $('#thumbCtn').html('')
+//            }
 
+            photoPart.init()
+            $('#show').on('click', function() {
+                var data = []
+                for(var i = 1; i < 43; i++) {
+                    data.push({url:'../img/' + i + '.jpg', id: i, itemId: i})
+                }
+                photoPart.show($('#show'), data)
+            })
+        })
 
-			/**
-			*　调整图片尺寸和位置。
-			*　图片旋转后，如果图片尺寸不变，则偏移量不变，旋转不会改变图片的中心点；
-			*　若图片尺寸改变，需要重新设置偏移量。
-			*/
-			function ajustImgPosition() {
-				var isRotated = !(rotateIndex%2),
-					oWidth = oImg.width(),
-					oHeight = oImg.height(),
-					bWidth = imgWrap.width(),
-					bHeight = imgWrap.height(),
-					sWidth,
-					sHeight,
-					left,
-					top,
-					isBig = $('#photoChangeSize .icon-m').hasClass('icon-min')
-					isSmall = false
-
-				if(!isBig) { // 图片没有放大的情况下, 处理图片的尺寸和偏移量
-					// 先设置图片尺寸 然后设置偏移量。
-					if(!isRotated) { // 图片没有被旋转
-						if(oWidth > bWidth || oHeight > bHeight) {
-							if(oWidth/oHeight > bWidth/bHeight) {
-								img.height('auto')
-								img.width(bWidth)
-							} else {
-								img.height(bHeight)
-								img.width('auto')
-							}
-							isSmall = true
-						} else {
-							img.width(oWidth)
-							img.height(oHeight)
-						}
-					} else {
-						if(oHeight > bWidth || oWidth > bHeight) {
-							if(oHeight/oWidth > bWidth/bHeight) {
-								img.height(bWidth)
-								img.width('auto')
-							} else {
-								img.height('auto')
-								img.width(bHeight)
-							}
-							isSmall = true
-						} else {
-							img.width(oWidth)
-							img.height(oHeight)
-						}
-					}
-					sWidth = img.width()
-					sHeight = img.height()
-					left = (bWidth - sWidth)/2
-					top = (bHeight - sHeight)/2	
-					img.css('top', top + 'px')
-					img.css('left', left + 'px')
-				} else { // 图片放大的情况下，只需处理图片的偏移量; 图片旋转后水平方向上仍需要居中，因此当设置left时不用考虑是否旋转（因为旋转不会改变中心点）
-					sWidth = img.width()
-					sHeight = img.height()
-					left = (bWidth - sWidth)/2
-					if(!isRotated) {
-						top = sHeight > bHeight ? 0 : (bHeight - sHeight)/2	
-					} else {
-						top = sWidth > bHeight ? (sWidth - sHeight)/2 : (bHeight - sHeight)/2	
-					}
-					img.css('top', top + 'px')
-					img.css('left', left + 'px')
-				}
-
-				if(!isBig) {
-					if(isSmall) {
-						$('#photoChangeSize').removeClass('hide').find('.icon-m').removeClass('icon-min').addClass('icon-max')
-					} else {
-						$('#photoChangeSize').addClass('hide').find('.icon-m').removeClass('icon-min').addClass('icon-max')
-					}
-				}
-			}
-
-			function clearRotate() {
-				img.removeClass('rotate')
-				img.css('transform', 'rotate(0deg)')
-				rotateIndex = 1
-			}
-			function clearPhotoCont() {
-				$('#photoCont').addClass('hide')
-				$('#thumbCtn').html('')
-			}
-			function showLoading() {
-				$('#photoLoading').removeClass('hide')
-				$('#phoneDeleteTip').addClass('hide')
-			}
-			function hideLoading() {
-				$('#photoLoading').addClass('hide')
-			}
-			function showDeleteTip() {
-				$('#photoLoading').removeClass('hide')
-				$('#phoneDeleteTip').removeClass('hide')
-			}
-			function hideDeleteTip() {
-				$('#photoLoading').addClass('hide')
-				$('#phoneDeleteTip').addClass('hide')
-			}
-			function resetChangeSize() {
-				$('#photoChangeSize .icon-m').removeClass('icon-min').addClass('icon-max')
-				$('#photoMoveArea').addClass('hide')
-			}
-
-
-			function loadData(data) {
-				var result = []
-				// <li class="thumb-item" data-id="3"><a class="thumb-link" href="javascript:"><img class="thumb-img" src="../img/index.jpg" alt=""></a></li>
-				$.each(data, function(i, item) {
-					result.push('<li class="thumb-item" data-id="'+ i +'"><a class="thumb-link" href="javascript:"><img class="thumb-img" src="' + item.src + '" alt=""></a></li>')
-				})
-				$('#thumbCtn').html(result.join(''))
-			}
-
-
-			function init(data) {
-				loadData(data)
-				img.on('load', function() {
-					ajustImgPosition()
-					img.css('opacity', 1)
-				})
-				img.css('opacity', 0)
-
-				var url = $('#thumbCtn > .thumb-item').first().find('.thumb-img').prop('src')
-				img.prop('src', url)
-				oImg.prop('src', url)
-			}
-
-			var data = [{src: '../img/1.jpg'}, {src: '../img/2.jpg'}, {src: '../img/3.jpg'}, {src: '../img/4.jpg'}]
-			init(data)
-
-		})
-	</script>
+    </script>
 </head>
 <body>
-	
 
-	<div class="photo-cont" id="photoCont">
-		<div class="photo-bg" id="photoBg"></div>
-		<div class="photo-wrap">
-			<div class="photo-title">
-				<a href="javascript:" id="closePhotoCont" class="close-photo-cont">X</a>
-			</div>
-			<div class="photo-content" id="photoContent">
-				<div class="img-wrap" id="imgWrap">
-					<img id="imgTarget" class="img-target max-size-frozen" src="" alt="" hidefocus="true">
-					<img id="oImg" class="hide" src="" alt="">
-				</div>
-				<div id="photoMoveArea" class="photo-move-area hide"></div>
-				<div class="photo-oper-cont hide" id="photoOperCont">
-					<a href="javascript:" class="photo-prev" id="photoPrev"></a>
-					<a href="javascript:" class="photo-next" id="photoNext"></a>
-					<div class="photo-oper-wrap" id="photoOperWrap">
-						<a href="javascript:" id="photoChangeSize" title="点击放大" class="hide"><i class="icon-m icon-max"></i></a>
-						<a href="javascript:" id="photoRotate" title="旋转"><i class="icon-m icon-rotate"></i></a>
-						<a href="javascript:" id="photoDelete" title="删除"><i class="icon-m icon-delete"></i></a>
-					</div>
-				</div>
-			</div>
-			<div class="thumb-list">
-				<ul class="thumb-ctn" id="thumbCtn">
-				</ul>
-			</div>
+<button id="show">show</button>
 
-			<div class="photo-loading hide" id="photoLoading">
-				<img src="../img/loading.gif" alt="loading" style="width: 40px; height: 40px">
-			</div>
-			<div class="photo-delete-tip hide" id="phoneDeleteTip">
-				<div class="tip-title">
-					提示
-					<a href="javascript:void(0);" class="popup-close cancel"><i class="fa fa-remove"></i>x</a>
-				</div>
-				<div class="tip-content">
-					确定删除图片？
-				</div>
-				<div class="oper-btn">
-					<a href="javascript:" class="cancel">取消</a>
-					<a href="javascript:" class="confirm" id="tipConfirm">确定</a>
-				</div>
-			</div>
-		</div>
-	</div>
+<div class="photo-cont hide" id="photoCont">
+    <div class="photo-bg" id="photoBg"></div>
+    <div class="photo-wrap">
+        <div class="photo-title">
+            <a href="javascript:" id="closePhotoCont" class="close-photo-cont"></a>
+        </div>
+        <div class="photo-content" id="photoContent">
+            <div class="img-wrap" id="imgWrap">
+                <img id="imgTarget" class="img-target max-size-frozen" src="" alt="" hidefocus="true">
+                <img id="oImg" class="hide" src="" alt="">
+            </div>
+            <div id="photoMoveArea" class="photo-move-area hide"></div>
+            <div class="photo-oper-cont hide" id="photoOperCont">
+                <a href="javascript:" class="photo-prev" id="photoPrev"></a>
+                <a href="javascript:" class="photo-next" id="photoNext"></a>
+                <div class="photo-oper-wrap" id="photoOperWrap">
+                    <a href="javascript:" id="photoChangeSize" title="点击放大" class="hide"><i class="icon-m icon-max"></i></a>
+                    <a href="javascript:" id="photoRotate" title="旋转"><i class="icon-m icon-rotate"></i></a>
+                    <a href="javascript:" id="photoDelete" title="删除"><i class="icon-m icon-delete"></i></a>
+                </div>
+            </div>
+            <div class="photo-delete-tip hide" id="phoneDeleteTip">
+                <p class="tip-content">确定删除图片？</p>
+                <div class="oper-btn">
+                    <a href="javascript:" class="confirm" id="tipConfirm">确定</a>
+                    <a href="javascript:" class="cancel">取消</a>
+                </div>
+            </div>
+        </div>
+        <div class="thumb-list" id="thumbList">
+            <ul class="thumb-ctn" id="thumbCtn"></ul>
+        </div>
+        <a href="javascript:" class="thumb-btn thumb-prev" id="thumbPrev"><i class="fa fa-chevron-left" aria-hidden="true"></i></a>
+        <a href="javascript:" class="thumb-btn thumb-next" id="thumbNext"><i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+
+        <div class="photo-loading hide" id="photoLoading">
+            <img src="../img/loading.gif" alt="loading" style="width: 40px; height: 40px">
+        </div>
+    </div>
+</div>
 </body>
 </html>
