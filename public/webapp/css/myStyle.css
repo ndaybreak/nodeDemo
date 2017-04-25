@@ -1,0 +1,11 @@
+.hi-class {
+	height: 20px;
+	background-color:gray;	
+}
+
+.separator-line {
+	height: 1px;
+    border-bottom: 1px solid gray;
+    width: 50%;
+    margin: 20px 0;
+}
