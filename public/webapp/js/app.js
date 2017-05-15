@@ -1,3 +1,4 @@
+;
 var app = angular.module('myApp', [ 'ngRoute', 'DataServiceModule', 'SharedServiceModule', 'ServiceTestModule']);
 
 app.config([ '$routeProvider', function($routeProvider) {
@@ -37,3 +38,5 @@ app.config(function(providerProvider){
 //    $locationProvider.hashPrefix('!');
 //}]);
 
+
+console.log('app')

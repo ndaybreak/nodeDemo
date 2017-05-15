@@ -9,3 +9,5 @@ function serviceCtrl($scope, factory, service, provider) {
 		provider.show();
 	};
 };
+
+console.log('serviceController')

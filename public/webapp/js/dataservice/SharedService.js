@@ -44,3 +44,4 @@ angular.module('SharedServiceModule', [])
     	}
     };
 });
+console.log('sharedservice')

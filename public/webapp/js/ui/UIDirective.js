@@ -83,3 +83,4 @@ app.directive('paScroll',function($window){
 		});
 	};
 });
+console.log('uiDirective')

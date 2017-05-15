@@ -69,3 +69,5 @@ angular.module("DataServiceModule", []).factory("AdminService", function($http){
 	};
 	return service;
 });
+
+console.log('dataservice')
