@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="myApp">
 <head>
     <meta charset="utf-8" />
 
@@ -12,8 +12,8 @@
 <body>
 
 <div id="myApp">
-    <br ng-controller="BoxCtrl">
-        value={{name}}</br>
+    <div ng-controller="BoxCtrl">
+        <!--value={{age}}</br>-->
         <input type="text" ng-model="name" id="testInput" class="test" />
     </div>
 
@@ -22,16 +22,26 @@
 <script type="text/javascript" charset="utf-8">
     'use strict';
 
-    var app = angular.module('myApp', [], angular.noop)
-
+    var app = angular.module('myApp', [])
     app.controller('BoxCtrl', function($scope, $element){
-//        $scope.$watch('name', function(newVal, oldVal, scope) {
-//            scope.age = (newVal || 0) + 10
+        $scope.count = 0
+        $scope.name = ''
+
+        $scope.$watch('name', function(newVal, oldVal, scope) {
+            scope.count++
+//            scope.age = scope.count + 10
+        })
+//        $scope.$watch('count', function(newVal, oldVal, scope) {
+//            scope.name += scope.count
+//            scope.age = newVal + 10000
+//        })
+//        $scope.$watch('age', function(newVal, oldVal, scope) {
+//            scope.name = 'name' + (newVal || 0)
 //        })
     });
 
 //    document.documentElement
-    angular.bootstrap(document.getElementById('myApp'), ['myApp']);
+//    angular.bootstrap(document.getElementById('myApp'), ['myApp']);
 </script>
 </body>
 </html>

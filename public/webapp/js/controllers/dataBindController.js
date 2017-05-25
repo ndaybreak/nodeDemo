@@ -22,4 +22,10 @@ function dataBindCtrl($scope, AdminService, check){
 			$scope.errorMesg = '';
 		}
 	};
+
+	$scope.age = 10
+
+	$scope.$watch('name', function(newVal, oldVal, scope) {
+		scope.age = (newVal || 0) + 10
+	})
 }
