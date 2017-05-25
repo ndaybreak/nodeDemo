@@ -5,10 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a3132bbd-f4a6-42b8-8e00-196433273ab2" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/webapp/html/dataBind.html" afterPath="$PROJECT_DIR$/public/webapp/html/dataBind.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/webapp/js/controllers/dataBindController.js" afterPath="$PROJECT_DIR$/public/webapp/js/controllers/dataBindController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/webapp/test.html" afterPath="$PROJECT_DIR$/public/webapp/test.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/webapp/css/myStyle.css" afterPath="$PROJECT_DIR$/public/webapp/css/myStyle.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/webapp/html/directive.html" afterPath="$PROJECT_DIR$/public/webapp/html/directive.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/webapp/js/controllers/directiveController.js" afterPath="$PROJECT_DIR$/public/webapp/js/controllers/directiveController.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/webapp/js/ui/UIDirective.js" afterPath="$PROJECT_DIR$/public/webapp/js/ui/UIDirective.js" />
     </list>
     <ignored path="myapp.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -30,68 +30,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="mainPage.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/webapp/mainPage.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="19" column="41" selection-start-line="19" selection-start-column="41" selection-end-line="19" selection-end-column="41" />
-              <folding>
-                <element signature="n#style#0;n#h3#0;n#nav#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/webapp/js/app.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="20" column="20" selection-start-line="20" selection-start-column="20" selection-end-line="20" selection-end-column="20" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="angular-route.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/webapp/jslib/angular-route.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="1023" column="54" selection-start-line="1023" selection-start-column="54" selection-end-line="1023" selection-end-column="54" />
-              <folding>
-                <marker date="1494840587772" expanded="true" signature="12604:13351" placeholder="..." />
-                <marker date="1494840587772" expanded="true" signature="13891:14044" placeholder="{...}" />
-                <marker date="1494840587772" expanded="true" signature="14126:14235" placeholder="{...}" />
-                <marker date="1494840587772" expanded="true" signature="14320:14432" placeholder="{...}" />
-                <marker date="1494840587772" expanded="true" signature="14504:15262" placeholder="{...}" />
-                <marker date="1494840587772" expanded="true" signature="14683:14953" placeholder="{...}" />
-                <marker date="1494840587772" expanded="true" signature="14782:14936" placeholder="{...}" />
-                <marker date="1494840587772" expanded="true" signature="15420:16007" placeholder="{...}" />
-                <marker date="1494840587772" expanded="true" signature="29977:30691" placeholder="..." />
-                <marker date="1494840587772" expanded="true" signature="30302:30372" placeholder="..." />
-                <marker date="1494840587772" expanded="true" signature="30750:30855" placeholder="..." />
-                <marker date="1494840587772" expanded="true" signature="30917:31079" placeholder="..." />
-                <marker date="1494840587772" expanded="true" signature="31163:31349" placeholder="{...}" />
-                <marker date="1494840587772" expanded="true" signature="31373:31408" placeholder="{...}" />
-                <marker date="1494840587772" expanded="true" signature="31465:31763" placeholder="{...}" />
-                <marker date="1494840587772" expanded="true" signature="31796:31828" placeholder="{...}" />
-                <marker date="1494840587772" expanded="true" signature="31876:31905" placeholder="{...}" />
-                <marker date="1494840587772" expanded="true" signature="31953:31986" placeholder="{...}" />
-                <marker date="1494840587772" expanded="true" signature="32116:32699" placeholder="[...]" />
-                <marker date="1494840587772" expanded="true" signature="32212:32698" placeholder="{...}" />
-                <marker date="1494840587772" expanded="true" signature="32282:32426" placeholder="{&quot;templateUrl&quot;: 'book.html'...}" />
-                <marker date="1494840587772" expanded="true" signature="32481:32634" placeholder="{&quot;templateUrl&quot;: 'chapter.html'...}" />
-                <marker date="1494840587772" expanded="true" signature="32735:32969" placeholder="[...]" />
-                <marker date="1494840587772" expanded="true" signature="32829:32968" placeholder="{...}" />
-                <marker date="1494840587772" expanded="true" signature="33005:33135" placeholder="[...]" />
-                <marker date="1494840587772" expanded="true" signature="33045:33134" placeholder="{...}" />
-                <marker date="1494840587772" expanded="true" signature="33174:33307" placeholder="[...]" />
-                <marker date="1494840587772" expanded="true" signature="33214:33306" placeholder="{...}" />
-                <marker date="1494840587772" expanded="true" signature="33444:33977" placeholder="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="DataService.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/webapp/js/dataservice/DataService.js">
           <provider selected="true" editor-type-id="text-editor">
@@ -102,15 +40,25 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UIDirective.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/webapp/js/ui/UIDirective.js">
+      <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/webapp/js/app.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="29" column="10" selection-start-line="29" selection-start-column="10" selection-end-line="29" selection-end-column="10" />
+              <caret line="25" column="10" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="10" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UIDirective.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/public/webapp/js/ui/UIDirective.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.20357941">
+              <caret line="7" column="45" selection-start-line="7" selection-start-column="45" selection-end-line="7" selection-end-column="45" />
               <folding>
-                <marker date="1494840587770" expanded="true" signature="1394:1433" placeholder="..." />
-                <marker date="1494840587770" expanded="true" signature="1501:1565" placeholder="..." />
-                <marker date="1494840587770" expanded="true" signature="1592:1603" placeholder="..." />
+                <marker date="1495705879373" expanded="true" signature="1557:1596" placeholder="..." />
+                <marker date="1495705879373" expanded="true" signature="1664:1728" placeholder="..." />
+                <marker date="1495705879373" expanded="true" signature="1755:1766" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -944,12 +892,46 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="dataBindController.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="dataBindController.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/webapp/js/controllers/dataBindController.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.20357941">
-              <caret line="7" column="31" selection-start-line="7" selection-start-column="31" selection-end-line="7" selection-end-column="31" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="20" column="14" selection-start-line="20" selection-start-column="14" selection-end-line="20" selection-end-column="14" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="directiveController.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/webapp/js/controllers/directiveController.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="8" column="1" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="directive.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/webapp/html/directive.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UIDirective.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/js/ui/UIDirective.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="1" column="14" selection-start-line="1" selection-start-column="14" selection-end-line="1" selection-end-column="14" />
+              <folding>
+                <marker date="1474613210650" expanded="true" signature="1134:1173" placeholder="..." />
+                <marker date="1474613210650" expanded="true" signature="1241:1305" placeholder="..." />
+                <marker date="1474613210650" expanded="true" signature="1332:1343" placeholder="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -981,7 +963,6 @@
         <option value="$PROJECT_DIR$/public/webapp/bootstrap.html" />
         <option value="$PROJECT_DIR$/public/webapp/js/dataservice/DataService.js" />
         <option value="$PROJECT_DIR$/public/webapp/js/dataservice/SharedService.js" />
-        <option value="$PROJECT_DIR$/public/webapp/js/ui/UIDirective.js" />
         <option value="$PROJECT_DIR$/public/webapp/jslib/angular-route.js" />
         <option value="$PROJECT_DIR$/public/webapp/js/controllers/serviceController.js" />
         <option value="$PROJECT_DIR$/public/webapp/mainPage.html" />
@@ -990,6 +971,10 @@
         <option value="$PROJECT_DIR$/public/webapp/html/dataBind.html" />
         <option value="$PROJECT_DIR$/public/webapp/js/controllers/dataBindController.js" />
         <option value="$PROJECT_DIR$/public/webapp/test.html" />
+        <option value="$PROJECT_DIR$/public/webapp/css/myStyle.css" />
+        <option value="$PROJECT_DIR$/public/webapp/js/controllers/directiveController.js" />
+        <option value="$PROJECT_DIR$/public/webapp/html/directive.html" />
+        <option value="$PROJECT_DIR$/public/webapp/js/ui/UIDirective.js" />
       </list>
     </option>
   </component>
@@ -1001,7 +986,7 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1924" />
+    <option name="width" value="1936" />
     <option name="height" value="1056" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
@@ -1091,6 +1076,32 @@
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
             <PATH_ELEMENT USER_OBJECT="js">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="nodeDemos">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="public">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="webapp">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="js">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="ui">
               <option name="myItemId" value="" />
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
@@ -1264,16 +1275,18 @@
     <option name="totallyTimeSpent" value="476000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1924" height="1056" extended-state="1" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2359491" sideWeight="0.7963164" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23445733" sideWeight="0.7963164" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32575756" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2359491" sideWeight="0.20368364" order="5" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23445733" sideWeight="0.20368364" order="5" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1284,13 +1297,11 @@
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="1391" y="439" width="444" height="168" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -1316,30 +1327,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/public/html/bootstrap/bootstrap-3.3.0/dist/fonts/glyphicons-halflings-regular.eot">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/html/bootstrap/bootstrap-3.3.0/dist/css/bootstrap.css.map">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.22168675">
-          <caret line="0" column="19698" selection-start-line="0" selection-start-column="19698" selection-end-line="0" selection-end-column="19698" />
-        </state>
-      </provider>
-      <provider editor-type-id="sourcemapFileViewerProvider">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/html/bootstrap/bootstrap-3.3.0/dist/css/bootstrap.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.81860465">
-          <caret line="6358" column="20" selection-start-line="6358" selection-start-column="4" selection-end-line="6358" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/html/bootstrap/bootstrap-3.3.0/dist/js/bootstrap.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.02905028">
@@ -1483,13 +1470,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/webapp/css/myStyle.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.30232558">
-          <caret line="10" column="1" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/jslib/angular-route.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.26145253">
@@ -1604,7 +1584,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="19" column="41" selection-start-line="19" selection-start-column="41" selection-end-line="19" selection-end-column="41" />
           <folding>
-            <element signature="n#style#0;n#h3#0;n#nav#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#h3#0;n#nav#0;n#body#0;n#html#0;n#!!top" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1613,14 +1593,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="58" column="0" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/webapp/js/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="20" column="20" selection-start-line="20" selection-start-column="20" selection-end-line="20" selection-end-column="20" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1665,18 +1637,6 @@
             <marker date="1494840587772" expanded="true" signature="33174:33307" placeholder="[...]" />
             <marker date="1494840587772" expanded="true" signature="33214:33306" placeholder="{...}" />
             <marker date="1494840587772" expanded="true" signature="33444:33977" placeholder="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/webapp/js/ui/UIDirective.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="29" column="10" selection-start-line="29" selection-start-column="10" selection-end-line="29" selection-end-column="10" />
-          <folding>
-            <marker date="1494840587770" expanded="true" signature="1394:1433" placeholder="..." />
-            <marker date="1494840587770" expanded="true" signature="1501:1565" placeholder="..." />
-            <marker date="1494840587770" expanded="true" signature="1592:1603" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -3309,9 +3269,65 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/webapp/js/controllers/dataBindController.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.20357941">
-          <caret line="7" column="31" selection-start-line="7" selection-start-column="31" selection-end-line="7" selection-end-column="31" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="20" column="14" selection-start-line="20" selection-start-column="14" selection-end-line="20" selection-end-column="14" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/webapp/css/myStyle.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.36321303">
+          <caret line="12" column="21" selection-start-line="12" selection-start-column="21" selection-end-line="12" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/ui/UIDirective.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="1" column="14" selection-start-line="1" selection-start-column="14" selection-end-line="1" selection-end-column="14" />
+          <folding>
+            <marker date="1474613210650" expanded="true" signature="1134:1173" placeholder="..." />
+            <marker date="1474613210650" expanded="true" signature="1241:1305" placeholder="..." />
+            <marker date="1474613210650" expanded="true" signature="1332:1343" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/webapp/js/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="25" column="10" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/webapp/js/controllers/directiveController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="1" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/webapp/html/directive.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/webapp/js/ui/UIDirective.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.20357941">
+          <caret line="7" column="45" selection-start-line="7" selection-start-column="45" selection-end-line="7" selection-end-column="45" />
+          <folding>
+            <marker date="1495705879373" expanded="true" signature="1557:1596" placeholder="..." />
+            <marker date="1495705879373" expanded="true" signature="1664:1728" placeholder="..." />
+            <marker date="1495705879373" expanded="true" signature="1755:1766" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>

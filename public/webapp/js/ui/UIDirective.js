@@ -2,15 +2,22 @@
 app.directive("hello",function(){
 	return{
 			restrict:'E',
-			template:'<h5>Hello AngularJS</h5>',    
+			template:'<h1>Hello AngularJS</h1>',
 			trunsclude:false,
 			replace:false,
-			scope:{},// 添加scope属性后，该指令将会拥有自己的scope,同时会继承该指令所在的scope
+			scope:{},// 添加scope属性后，该指令将会拥有自己的scope,同时会继承该指令所在的scope  (note. 应该不是继承, 但是可以通过scope.$parent 来访问父scope)
 //			compile 与 link 函数不能同时出现，同时出现时只有compile函数有作用
 //			compile:function(){},//$compile 函数处理时调用指令的compile函数来改变dom结构
 			link:function(scope,element,attrs){//将模板的scope与模板关联
 				console.log('child scope');
 				console.log(scope);
+			}
+			,
+			compile: function() {
+				console.log(arguments)
+				return function() {
+					console.log(arguments)
+				}
 			}
 	};
 });
