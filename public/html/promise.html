@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Promise</title>
+    <script>
+        var getJSON = function(url) {
+            var promise = new Promise(function(resolve, reject){
+                var client = new XMLHttpRequest();
+                client.open("GET", url);
+                client.onreadystatechange = handler;
+                client.responseType = "json";
+                client.setRequestHeader("Accept", "application/json");
+                client.send();
+
+                function handler() {
+                    if (this.readyState !== 4) {
+                        return;
+                    }
+                    if (this.status === 200) {
+                        resolve(this.response);
+                    } else {
+                        reject(new Error(this.statusText));
+                    }
+                };
+            });
+
+            return promise;
+        };
+
+        getJSON("../data/1.json").then(function(json) {
+            return getJSON('../data/2.json');
+        }).then(function funcA(comments) {
+            console.log("Resolved: ", comments);
+        }, function funcB(err){
+            console.log("Rejected: ", err);
+        });
+
+
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

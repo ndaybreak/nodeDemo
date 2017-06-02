@@ -33,6 +33,11 @@
             right: 15%;
             min-width: 500px;
             z-index: 10011;
+            transform: scale(.3);
+            transition: transform 1s ease-in;
+        }
+        .in {
+            transform: scale(1);
         }
         .thumb-ctn {
             position: relative;
@@ -753,7 +758,7 @@
                         rotateIndex = 1
                     }
                     function clearPhotoCont() {
-                        $('#photoCont').addClass('hide')
+                        $('#photoCont').addClass('hide').children().eq(1).removeClass('in')
                         $('#thumbCtn').html('')
                     }
                     function showLoading() {
@@ -797,6 +802,9 @@
                     $('#photoCont').removeClass('hide')
                     img.addClass('max-size-frozen')
                     $('#photoMoveArea').addClass('hide')
+                    setTimeout(function() {
+                        $('#photoCont').children().eq(1).addClass('in')
+                    }, 0)
                 }
             }
 
