@@ -3,22 +3,21 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Test</title>
+
 </head>
-<body>
-	<input type="range" />
+<body id="body">
+	<a href="http://www.baidu.com" id="test">ssss</a>
 
-	<a>
-		sdfsdfsdfdf
-		<p>sdfsdf</p>
-	</a>
-
-	<p>
-		顶顶顶顶
-		<div>
-			dfsdjf
-		</div>
-	</p>
-
-
+	<script>
+		var body = document.getElementById('body')
+		body.addEventListener('click', function(e) {
+			alert(1)
+		})
+		var test = document.getElementById('test')
+		test.addEventListener('click', function(e) {
+			e.preventDefault()
+			e.stopPropagation()
+		})
+	</script>
 </body>
 </html>
