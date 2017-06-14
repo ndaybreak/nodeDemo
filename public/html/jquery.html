@@ -45,6 +45,21 @@
 			$(document).on('focus', '#btn', function(e) {
 				console.log(e.bubbles)
 			})
+
+			var list = []
+			for(var i = 0; i < 5; i++) {
+				list.push({value: i, display: i * 9 + '_name'})
+			}
+
+			$.ajax({
+				type: 'post',
+				url: '/test',
+				headers: '"Expect":"100-continue"',
+				data: {list: list},
+				success: function(res) {
+					console.log(res)
+				}
+			})
 		})
 	</script>
 </head>

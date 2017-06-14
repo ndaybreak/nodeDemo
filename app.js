@@ -30,6 +30,11 @@ app.get('/myapp/template/:templateId', function (req, res) {
     res.render(req.params.templateId, {})
 })
 
+app.post('/test', function(req, res) {
+  console.log(req)
+  res.send({name: 'xiaoming'})
+})
+
 app.use('/myapp', routes); // angular
 app.use('/test', tests);   // testing
 app.use('/css', css);      // test css
