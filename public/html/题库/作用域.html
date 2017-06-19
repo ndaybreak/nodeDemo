@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script>
+        var a = 1
+        function test() {
+            console.log(a)
+            try{
+                a(3)
+                A()
+            } catch (e) {
+                a = 2
+            }
+            function a(b) {
+                a = b
+            }
+            console.log(++a)
+        }
+        test()
+        console.log(a)
+
+        console.log('涉及变量类型的切换，以及不同的作用域')
+    </script>
+</head>
+<body>
+涉及变量类型的切换，以及不同的作用域
+</body>
+</html>

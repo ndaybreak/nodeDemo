@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    某段dom结构如下：
+    <xmp>
+        <ul id="list">
+            <li>六一</li>
+            <li>陈二</li>
+            <li>说多了副科级</li>
+            <li>打算离开房间</li>
+        </ul>
+    </xmp>
+    在该dom结构中，li在列表中的下标分别是0,1,2,3.
+    请分别为每个li添加点击事件，输出相应下标值，注意：
+    使用原生js，且以上所有元素只能添加事件，不能添加属性
+
+    <ul id="list">
+        <li>六一</li>
+        <li>陈二</li>
+        <li>说多了副科级</li>
+        <li>打算离开房间</li>
+    </ul>
+
+    <script>
+        var list = document.getElementById('list')
+        var allNodes = list.childNodes
+        var liNodes = []
+        var node
+        for(var i = 0, len = allNodes.length; i < len; i++) {
+            node = allNodes[i]
+            if(node.tagName && node.tagName.toLowerCase() === 'li') {
+                liNodes.push(node)
+            }
+        }
+
+        liLength = liNodes.length
+        function getIndex(node) {
+            for(var i = 0; i < liLength; i++) {
+                if(node === liNodes[i]) {
+                    return i
+                }
+            }
+        }
+        list.addEventListener('click', function(e) {
+            if(e.target.tagName && e.target.tagName.toLowerCase() === 'li') {
+                console.log(getIndex(e.target))
+            }
+        })
+    </script>
+</body>
+</html>

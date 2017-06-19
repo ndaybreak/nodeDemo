@@ -5,57 +5,16 @@
 	<title>Jquery</title>
 	<script src="../jslib/jquery.js"></script>
 	<style>
-		.test1 {
-			height: 200px;
-			width: 200px;
-			border: 1px solid #999;
-			display: flex;
-    /* flex-direction: column; */
-    flex-wrap: wrap;
-    justify-content: space-between;
-    /* align-items: center; */
-    align-content: space-between;
-		}
-		.test2 {
-			/*width: 100px;
-			height: 100px;*/
-			/*margin-left: -50px;
-			margin-top: -50px;*/
-			background-color: green;
-			width: 60px;
-		}
-		.test3 {
-			background-color: gray;
-			width: 60px;
-		}
-		.test4 {
-			background-color: red;
-			width: 60px;
-		}
-		.test5 {
-			background-color: black;
-			width: 60px;
-		}
+
 	</style>
 	<script>
 		$(function() {
-			$('#test').on('click', function(e) {
-				$(this).after('<input id="btn" type="button"  value="click" />')
-			})
-			$(document).on('focus', '#btn', function(e) {
-				console.log(e.bubbles)
-			})
-
-			var list = []
-			for(var i = 0; i < 5; i++) {
-				list.push({value: i, display: i * 9 + '_name'})
-			}
 
 			$.ajax({
 				type: 'post',
 				url: '/test',
-				headers: '"Expect":"100-continue"',
-				data: {list: list},
+				// headers: '"Expect":"100-continue"',
+				// data: {list: list},
 				success: function(res) {
 					console.log(res)
 				}
