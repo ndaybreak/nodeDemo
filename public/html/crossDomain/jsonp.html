@@ -3,8 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
+    <script src="../../jslib/jquery.js"></script>
+    <script src="http://qa.gz.tuochetong.com/common/js/lib/require.js"></script>
+    <script>
+        $.ajax({
+            url: 'http://qa.gz.tuochetong.com/ws-truck/guangZhouHomePage/port/query?code=CNCAN',
+            type: 'get',
+            success: function(res) {
+                console.log(res)
+            }
+        })
+        $.ajax({
+            url: '../../test',
+            type: 'get',
+            success: function(res) {
+                console.log(res)
+            }
+        })
+    </script>
 </head>
 <body>
+
+<img src="http://qa.gz.tuochetong.com/truck-saas/img/weixin_bg.png" alt="">
+
+
 
 </body>
 </html>

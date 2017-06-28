@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>scale</title>
+	<style>
+		canvas{
+			border: 1px solid #ddd;
+			margin: 20px auto;
+			display: block;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="canvas">
+		您的浏览器不支持canvas
+	</canvas>
+	<canvas id="watermark" style="display: none;">
+        您的浏览器尚不支持canvas
+    </canvas>
+    
+</body>
+<script type="text/javascript">
+	var canvasWidth = 1152;
+	var canvasHeight = 768;
+	var watermarkWidth = 270;
+	var watermarkHeight = 100;
+	var canvas = document.getElementById('canvas');
+	var ctx = canvas.getContext('2d');
+	var watermark = document.getElementById("watermark");
+    var wctx = watermark.getContext("2d");
+
+	canvas.width = canvasWidth;
+	canvas.height = canvasHeight;
+	watermark.width = watermarkWidth;
+	watermark.height = watermarkHeight;
+	var img = new Image();
+	img.src = '3.jpg';
+	var scale = 0.8;
+	var imgWidth;
+	var imgHeight;
+	var imgTop;
+	var imgLeft;
+	img.onload = function(){
+		//制作水印
+		wctx.font = 'bold 50px 宋体';
+		wctx.fillStyle = '#999';
+		wctx.textBaseline = 'middle';
+		wctx.textAlign = 'center';
+		wctx.fillText('BY 童俊豪',135,50);
+
+		drowImgByScale(scale);
+	}
+	var scrollFunc = function(e){
+		e.preventDefault();
+		if(e.wheelDelta){
+				//向上滚动
+			if(e.wheelDelta > 0) scale += 0.1;
+				//向下滚动
+			else scale -= 0.1;
+		}else{
+			//火狐浏览器
+				//向上滚动
+			if(e.detail > 0) scale += 0.1;
+				//向下滚动
+			else{ scale -= 0.1;}
+		}
+		if(scale >= 2){
+			scale = 2;
+		}
+		if(scale <= 0.1){
+			scale = 0.1;
+		}
+		drowImgByScale(scale)
+	}
+	       
+	if(canvas.addEventListener){
+		canvas.addEventListener('DOMMouseScroll', scrollFunc,false);
+	}
+	canvas.onmousewheel = scrollFunc;
+
+	function drowImgByScale(scale,l,t){
+		imgWidth = scale*canvasWidth;
+		imgHeight = scale*canvasHeight;
+		imgTop = t ? t : canvasHeight/2 - imgHeight/2;
+		imgLeft = l ? l : canvasWidth/2 - imgWidth/2;
+		ctx.clearRect(0,0,canvasWidth,canvasHeight);
+		ctx.drawImage(img,imgLeft,imgTop,imgWidth,imgHeight);
+		//画水印
+		ctx.drawImage(watermark,canvasWidth - watermarkWidth,canvasHeight - watermarkHeight);
+	}
+
+	canvas.onmousedown = function(e){
+		var downEvent = e||event;
+		var offsetX = downEvent.offsetX;
+		var offsetY = downEvent.offsetY;
+		var imgX = offsetX - imgLeft;
+		var imgY = offsetY - imgTop;
+		if(imgX < 0 || imgX > imgWidth) return false;
+		if(offsetY < 0 || imgY > imgHeight) return false;
+		canvas.onmousemove = function(ev){
+			var moveEvent = ev||event;
+			var x = moveEvent.offsetX - imgX;
+			var y = moveEvent.offsetY - imgY;
+			drowImgByScale(scale,x,y);
+		}
+		document.onmouseup = function(){
+			canvas.onmousemove = null;
+			canvas.onmouseup = null;
+		}
+	}
+</script>
+</html>

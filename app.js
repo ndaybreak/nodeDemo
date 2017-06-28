@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var session = require('express-session');
 
 var routes = require('./routes/index');
 var tests = require('./routes/test');
@@ -22,6 +23,13 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(session({
+    secret: '12345',
+    name: 'testapp',   //这里的name值得是cookie的name，默认cookie的name是：connect.sid
+    cookie: {maxAge: 20000 },  //设置maxAge是80000ms，即80s后session和相应的cookie失效过期
+    resave: true,
+    saveUninitialized: true,
+}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 
@@ -29,11 +37,43 @@ app.get('/myapp/template/:templateId', function (req, res) {
     console.log('------------  /myapp/template/'+ req.params.templateId +'  --------------------------------------------------')
     res.render(req.params.templateId, {})
 })
-
-app.post('/test', function(req, res) {
-  console.log(req)
-  res.send({name: 'xiaoming'})
+app.get('/login', function(req, res) {
+  req.session.login = true
+  res.send({state: 'success'})
 })
+app.get('/info', function(req, res) {
+  if(req.session.login) {
+    req.session.login = true
+    console.log('=======================================info')
+    res.send({name: 'xiao'})
+  } else {
+    res.send('未登录')
+  }
+})
+//app.post('/test', function(req, res) {
+//  console.log(req)
+//  res.send({name: 'xiaoming'})
+//})
+
+app.get('/awesome', function(req, res){
+    
+    if(req.session.lastPage) {
+        console.log('Last page was: ' + req.session.lastPage + ".");    
+    }    
+    req.session.lastPage = '/awesome'; //每一次访问时，session对象的lastPage会自动的保存或更新内存中的session中去。
+    res.send("You're Awesome. And the session expired time is: " + req.session.cookie.maxAge);
+});
+
+app.get('/radical', function(req, res){
+    if (req.session.lastPage) {
+        console.log('Last page was: ' + req.session.lastPage + ".");    
+    }
+    req.session.lastPage = '/radical';  
+    res.send('What a radical visit! And the session expired time is: ' + req.session.cookie.maxAge);
+});
+
+
+
 
 app.use('/myapp', routes); // angular
 app.use('/test', tests);   // testing
