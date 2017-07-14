@@ -19,6 +19,9 @@
 	<canvas id="watermark" style="display: none;">
         您的浏览器尚不支持canvas
     </canvas>
+
+</br></br></br></br>
+    <button id="test" >旋转</button>
     
 </body>
 <script type="text/javascript">
@@ -36,8 +39,8 @@
 	watermark.width = watermarkWidth;
 	watermark.height = watermarkHeight;
 	var img = new Image();
-	img.src = '3.jpg';
-	var scale = 0.8;
+	img.src = '1.jpg';
+	var scale = 0.5;
 	var imgWidth;
 	var imgHeight;
 	var imgTop;
@@ -74,6 +77,8 @@
 		}
 		drowImgByScale(scale)
 	}
+
+	var count = 0
 	       
 	if(canvas.addEventListener){
 		canvas.addEventListener('DOMMouseScroll', scrollFunc,false);
@@ -86,9 +91,14 @@
 		imgTop = t ? t : canvasHeight/2 - imgHeight/2;
 		imgLeft = l ? l : canvasWidth/2 - imgWidth/2;
 		ctx.clearRect(0,0,canvasWidth,canvasHeight);
+
+		ctx.translate(canvasWidth/2, canvasHeight/2);
+		ctx.rotate((90*count) * Math.PI / 180)
+		ctx.translate(-canvasWidth/2, -canvasHeight/2);
+
 		ctx.drawImage(img,imgLeft,imgTop,imgWidth,imgHeight);
 		//画水印
-		ctx.drawImage(watermark,canvasWidth - watermarkWidth,canvasHeight - watermarkHeight);
+		// ctx.drawImage(watermark,canvasWidth - watermarkWidth,canvasHeight - watermarkHeight);
 	}
 
 	canvas.onmousedown = function(e){
@@ -110,5 +120,11 @@
 			canvas.onmouseup = null;
 		}
 	}
+
+	var test = document.getElementById('test')
+	test.addEventListener('click', function() {
+		count = 1
+		drowImgByScale(scale)
+	})
 </script>
 </html>

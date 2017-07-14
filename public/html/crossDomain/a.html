@@ -9,17 +9,20 @@
 aaaaaaaaa
 </body>
 <script>
-        // document.domain = 'localhost';
+
+        // document.domain = '10.134.240.169';
+//        a.html
         var ifr = document.createElement('iframe');
-        ifr.src = 'http://localhost:3000/html/crossDomain/b.html';
-        ifr.style.display = 'none';
+        ifr.src = 'http://10.134.240.169:3000/html/crossDomain/b.html';
         document.body.appendChild(ifr);
         ifr.onload = function(){
-            var doc = ifr.contentDocument || ifr.contentWindow.document;
-            //在这里操作doc，也就是b.html
-            ifr.onload = null;
-            console.log(doc)
-            console.log(ifr)
+            ifr.contentWindow.postMessage('a', '*')
         };
+//        b.html
+        window.onmessage = function() {
+            console.log(arguments)
+        }
+
+        window.postMessage('c', '*')
     </script>
 </html>
