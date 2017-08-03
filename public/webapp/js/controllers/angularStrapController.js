@@ -7,7 +7,18 @@ function angularStrapCtrl($scope, $modal, dataService, validate, uiService){
 
     $scope.myName = 'xiao'
 
-    // $scope.show = false
+    // Show when some event occurs (use $promise property to ensure the template has been loaded)
+    $scope.showModal = function() {
+        // infoModal.$promise.then(infoModal.show);
+        uiService.confirm({
+            scope: $scope,
+            title: 'test',
+            content: '删除？'
+        }, function() {
+            alert(1)
+        })
+    }
+
 
     $scope.info = {
         name: 'xiao',
@@ -15,17 +26,24 @@ function angularStrapCtrl($scope, $modal, dataService, validate, uiService){
         addr: '山东省'
     }
 
-    var infoModal = $modal({
+    var infoModal = uiService.confirm({
         scope: $scope,
         title: '个人信息',
         templateUrl: '/webapp/html/myInfoModal.html',
         show: false
+    }, function() {
+        var modal = this
+        console.log($scope.info)
+        setTimeout(function() {
+            modal.hide()
+        }, 3000)
+        return false
+    }, function() {
+        alert('closed')
     })
-    // Show when some event occurs (use $promise property to ensure the template has been loaded)
-    $scope.showModal = function() {
+    $scope.showInfo = function() {
         infoModal.$promise.then(infoModal.show);
-
-    };
+    }
 
     $scope.onModalClosed = function() {
         infoModal.hide()
