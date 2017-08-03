@@ -114,6 +114,14 @@ app.directive('paScroll',function($window){
 	};
 });
 
+// app.directive('input', function() {
+// 	return function(scope, element) {
+//         element.on('blur', function() {
+//         	alert(element.val())
+// 		})
+// 	}
+// })
+
 app.directive('hpeButton', function() {
 	return {
 		restrict: 'AE',

@@ -1,5 +1,5 @@
 angular.module('SharedServiceModule', [])
-.factory('check', function(AdminService) {
+.factory('validate', function(dataService) {
 	var _c = {};
 	_c.trim = function(val){
 		return val.replace(/(^\s*)|(\s*$)/g,"");

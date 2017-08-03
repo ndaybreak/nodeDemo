@@ -4,6 +4,6 @@ function directiveCtrl($scope){
 	$scope.title = "ttt";
 
 
-
+    $scope.userType = 'guest';
 
 }

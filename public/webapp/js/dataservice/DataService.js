@@ -1,4 +1,4 @@
-angular.module("DataServiceModule", []).factory("AdminService", function($http){
+angular.module("DataServiceModule", []).factory("dataService", function($http){
 
 	var URL_GET_TABLE_DATA = "../GetTableData";
 

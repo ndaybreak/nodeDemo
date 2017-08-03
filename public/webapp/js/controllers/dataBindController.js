@@ -1,4 +1,4 @@
-function dataBindCtrl($scope, AdminService, check){
+function dataBindCtrl($scope, dataService, validate){
 	$scope.myName = 'xxxx';
 	
 	$scope.$watch('myName',function(newVal,oldVal){
@@ -9,13 +9,13 @@ function dataBindCtrl($scope, AdminService, check){
 	};
 	
 	$scope.getData = function(){
-		AdminService.getTableData(function(result){
+        dataService.getTableData(function(result){
 			alert(result.data);
 		});
 	};
 	
 	$scope.checkNumber = function(){
-		var result = check.exec($scope.number, ['onlyNumber']);
+		var result = validate.exec($scope.number, ['onlyNumber']);
 		if(!result[0]){
 			$scope.errorMesg = 'not only number';
 		}else{
@@ -26,6 +26,6 @@ function dataBindCtrl($scope, AdminService, check){
 	$scope.age = 10
 
 	$scope.$watch('name', function(newVal, oldVal, scope) {
-		scope.age = (newVal || 0) + 10
+		$scope.age = (newVal || 0) + 10
 	})
 }

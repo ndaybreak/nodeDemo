@@ -1,5 +1,5 @@
 ;
-var app = angular.module('myApp', [ 'ngRoute', 'DataServiceModule', 'SharedServiceModule', 'ServiceTestModule']);
+var app = angular.module('myApp', ['ngAnimate', 'ngSanitize', 'ngRoute', 'mgcrea.ngStrap', 'DataServiceModule', 'SharedServiceModule', 'ServiceTestModule', 'uiServiceModule']);
 
 app.config([ '$routeProvider', function($routeProvider) {
 	$routeProvider
@@ -18,6 +18,9 @@ app.config([ '$routeProvider', function($routeProvider) {
 		.when('/serviceTest', {
 			templateUrl : 'html/service.html',
 			controller : ["$scope", "factory", "service", "provider", serviceCtrl]})
+		.when('/angularStrap', {
+			templateUrl : 'html/angularStrap.html',
+			controller : angularStrapCtrl})
 		.otherwise({
 			redirectTo : '/'
 		});
