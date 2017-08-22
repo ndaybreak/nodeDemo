@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>国家心血管病中心</title>
+
+    <meta content="width=device-width, initial-scale=1.0 , maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta content="云鹊医,云鹊医疗,云鹊医疗科技（上海）有限公司,pica" name="keywords">
+    <meta content="云鹊医疗科技（上海）有限公司，主要经营：致力打造基层慢病管理专家,与国家心血管病中心( NCCD)共同打造国内最具实战性、专业性和权威性的医学课程。；公司位于美丽的浦东新区龙阳路2277号永达国际大厦10楼。" name="description">
+    <meta name="location" content="province=上海;city=上海" />
+    <meta content="云鹊医疗科技（上海）有限公司" name="author">
+    <meta http-equiv="cleartype" content="on">
+
+    <meta property="og:site_name" content="云鹊医">
+    <meta property="og:title" content="云鹊医">
+    <meta property="og:description" content="云鹊医疗科技（上海）有限公司，主要经营：致力打造基层慢病管理专家,与国家心血管病中心( NCCD)共同打造国内最具实战性、专业性和权威性的医学课程。；公司位于美丽的浦东新区龙阳路2277号永达国际大厦10楼。">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://www.yunqueyi.com/PICA_FE/img/icon/index_logoicon.png"><!-- link to image for socio -->
+    <meta property="og:url" content="https://www.yunqueyi.com">
+
+    <link rel="shortcut icon" href="../img/icon/index_logoicon_guojia.png">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        html,
+        body,
+        .wrap {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+            font-family: "Microsoft Yahei", "微软雅黑";
+        }
+        .wrap {
+            background: url(../img/add_doctor_bkg.jpg) center no-repeat;
+            background-size: cover;
+            position: relative;
+        }
+        #qrcodeCanvas {
+            position: relative;
+            text-align: center;
+            background-color: #ffffff;
+            box-shadow: 5px 5px 6px 0 rgba(0, 0, 0, 0.35);
+            padding: 1px;
+            left: 50%;
+        }
+        .doctor-info {
+            text-align: center;
+            position: absolute;
+            color: white;
+            font-size: 16px;
+            width: 100%;
+            letter-spacing: 2px;
+        }
+        .doctor-name {
+            font-size: 19px;
+            margin-right: 10px;
+        }
+        .code-wrap {
+            text-align: center;
+            position: absolute;
+            width: 100%;
+        }
+        .code-info {
+            font-size: 14px;
+            margin-top: 10px;
+            color: #4b4b4b;
+        }
+
+        #qrcodeCanvas {
+            width: 150px;
+            height: 150px;
+            margin-left: -75px;
+        }
+        .doctor-info {
+            top: 200px;
+        }
+        .code-wrap {
+            top: 310px;
+        }
+
+        #download {
+            width: 90px;
+            height: 70px;
+            background-color: green;
+            position: absolute;
+            bottom: 90px;
+            opacity: 0.2;
+        }
+
+        /*android 竖屏*/
+        @media only screen and (max-device-width:768px) {
+            #qrcodeCanvas {
+                width: 150px;
+                height: 150px;
+                margin-left: -75px;
+            }
+            .doctor-info {
+                top: 280px;
+            }
+            .code-wrap {
+                top: 420px;
+            }
+            .wrap {
+                background-size: cover;
+                background-position-y: -10px;
+                background-color: #fad65b;
+            }
+        }
+
+        @media only screen and (max-device-width:414px) {
+            #qrcodeCanvas {
+                width: 150px;
+                height: 150px;
+                margin-left: -75px;
+            }
+            .doctor-info {
+                top: 200px;
+            }
+            .code-wrap {
+                top: 295px;
+            }
+        }
+
+        @media only screen and (max-device-width:360px) and (max-device-height:640px) {
+            #qrcodeCanvas {
+                width: 150px;
+                height: 150px;
+                margin-left: -75px;
+            }
+            .doctor-info {
+                top: 175px;
+            }
+            .code-wrap {
+                top: 255px;
+            }
+        }
+
+        @media only screen and (max-device-width:360px) and (max-device-height:600px) {
+            #qrcodeCanvas {
+                width: 150px;
+                height: 150px;
+                margin-left: -75px;
+            }
+            .doctor-info {
+                top: 145px;
+            }
+            .code-wrap {
+                top: 215px;
+            }
+        }
+
+        /*android 横屏*/
+        @media only screen and (max-device-width:768px) and (orientation : landscape){
+            #qrcodeCanvas {
+                width: 150px;
+                height: 150px;
+                margin-left: -75px;
+            }
+            .doctor-info {
+                top: 350px;
+            }
+            .code-wrap {
+                top: 440px;
+            }
+            .wrap {
+                background-size: contain;
+                min-height: 1050px;
+            }
+            #download {
+                width: 150px;
+                height: 100px;
+                bottom: 160px;
+            }
+        }
+
+
+
+        /*ihpne5*/
+
+        @media only screen and (min-device-width:320px) and (max-device-width:320px){
+            #qrcodeCanvas {
+                width: 120px;
+                height: 120px;
+                margin-left: -60px;
+            }
+            .doctor-info {
+                top: 150px;
+            }
+            .code-wrap {
+                top: 217px;
+            }
+        }
+        @media only screen and (min-device-width:568px) and (max-device-width:568px) and (orientation : landscape)  {
+            #qrcodeCanvas {
+                width: 120px;
+                height: 120px;
+                margin-left: -60px;
+            }
+            .doctor-info {
+                top: 270px;
+            }
+            .code-wrap {
+                top: 420px;
+            }
+            .wrap {
+                background-size: contain;
+                min-height: 1010px;
+            }
+        }
+
+        /*ihpne6*/
+
+        @media only screen and (min-device-width:375px) and (max-device-width:375px){
+            #qrcodeCanvas {
+                width: 150px;
+                height: 150px;
+                margin-left: -75px;
+            }
+            .doctor-info {
+                top: 170px;
+            }
+            .code-wrap {
+                top: 260px;
+            }
+            #download {
+                bottom: 110px;
+            }
+        }
+        @media only screen and (min-device-width:667px) and (max-device-width:667px) and (orientation : landscape)  {
+            #qrcodeCanvas {
+                width: 150px;
+                height: 150px;
+                margin-left: -75px;
+            }
+            .doctor-info {
+                top: 300px;
+            }
+            .code-wrap {
+                top: 500px;
+            }
+            .wrap {
+                background-size: contain;
+                min-height: 1185px;
+            }
+        }
+
+        /*ihpone6+*/
+        @media only screen and (min-device-width:414px) and (max-device-width:414px) {
+            #qrcodeCanvas {
+                width: 150px;
+                height: 150px;
+                margin-left: -75px;
+            }
+            .doctor-info {
+                top: 185px;
+            }
+            .code-wrap {
+                top: 280px;
+            }
+            #download {
+                bottom: 110px;
+            }
+        }
+        @media only screen and (min-device-width:736px) and (max-device-width:736px) and (orientation : landscape)  {
+            #qrcodeCanvas {
+                width: 150px;
+                height: 150px;
+                margin-left: -75px;
+            }
+            .doctor-info {
+                top: 340px;
+            }
+            .code-wrap {
+                top: 540px;
+            }
+            .wrap {
+                background-size: contain;
+                min-height: 1310px;
+            }
+            #download {
+                bottom: 200px;
+            }
+        }
+
+    </style>
+
+</head>
+<body>
+
+<div class="wrap">
+    <div class="doctor-info" id="doctorInfo">
+        <span class="doctor-name">张海波</span><span class="doctor-level">主任医师</span> <br>
+        <span class="addr">长宁区疾病控制中心</span>|<span class="class">全科</span>
+    </div>
+    <div class="code-wrap">
+        <div id="qrcodeCanvas"></div>
+        <div class="code-info">
+            通过二维码添加医生 <br>
+            之后将能接受患教知识
+        </div>
+    </div>
+    <a href="" id="download" download="医生二维码"></a>
+</div>
+
+<script src="../jslib/jquery.js"></script>
+<script src="../jslib/jquery.qrcode.img.js"></script>
+<script>
+    $(function() {
+        jQuery('#qrcodeCanvas').qrcode({
+            render    : "canvas",
+            text    : "http://www.baidu.com",
+            width : $('#qrcodeCanvas').width(),               //二维码的宽度
+            height : $('#qrcodeCanvas').height(),              //二维码的高度
+            background : "#ffffff",       //二维码的后景色
+            foreground : "#000000",        //二维码的前景色
+            src: '../img/pica_default.png'             //二维码中间的图片
+        });
+
+        $('#download').on('click', function() {
+            $('#download').attr('href', $('#qrcodeCanvas').find('canvas')[0].toDataURL('image/png'))
+//            var canvasElement = $('#qrcodeCanvas').find('canvas')[0]
+//
+//            var MIME_TYPE = "image/png";
+//
+//            var imgURL = canvasElement.toDataURL(MIME_TYPE);
+//
+//            var dlLink = document.createElement('a');
+//            dlLink.download = '医生二维码';
+//            dlLink.href = imgURL;
+//            dlLink.dataset.downloadurl = [MIME_TYPE, dlLink.download, dlLink.href].join(':');
+//
+//            document.body.appendChild(dlLink);
+//            dlLink.click();
+//		    document.body.removeChild(dlLink);
+//		    alert(1)
+        })
+    })
+</script>
+</body>
+</html>

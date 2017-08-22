@@ -1,0 +1,14 @@
+<div class="pica-pagination-wrap">
+    <uib-pagination ng-change="paperChangeCallback()" ng-model="currentPage"
+                    items-per-page="pageSize" total-items="totalItems"  first-text="页首" last-text="页尾"
+                    previous-text="&lsaquo;" next-text="&rsaquo;"
+                    max-size="5" class="pagination-sm" boundary-links="true" rotate="false"></uib-pagination>
+
+    <select class="form-control page-size" ng-model="pageSize" ng-change="sizeChangeCallback()"
+            ng-options="item for item in pageList" >
+    </select>
+    <span class="page-size-wrap">行/每页</span>
+    <span class="total-items">
+        总记录数: <span ng-bind="totalItems"></span>
+    </span>
+</div>

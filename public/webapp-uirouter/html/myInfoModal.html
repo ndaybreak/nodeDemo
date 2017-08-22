@@ -1,0 +1,28 @@
+<div class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" ng-show="title">
+                <button type="button" class="close" ng-click="onCancel()">&times;</button>
+                <h4 class="modal-title" ng-bind-html="title"></h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="name">姓名：</label><input type="text" id="name" ng-model="info.name" />
+                    </div>
+                    <div class="col-md-4">
+                        <label for="name">年龄：</label><input type="text" id="age" ng-model="info.age"/>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="name">地址：</label><input type="text" id="addr" ng-model="info.addr"/>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" ng-click="onCancel()">Close</button>
+                <button type="button" class="btn btn-primary" ng-click="onConfirm()">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>

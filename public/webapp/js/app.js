@@ -1,5 +1,5 @@
 ;
-var app = angular.module('myApp', ['ngAnimate', 'ngSanitize', 'ngRoute', 'mgcrea.ngStrap', 'DataServiceModule', 'SharedServiceModule', 'ServiceTestModule', 'uiServiceModule']);
+var app = angular.module('myApp', ['ngAnimate', 'ngSanitize', 'ngRoute', 'mgcrea.ngStrap', 'ui.bootstrap', 'DataServiceModule', 'SharedServiceModule', 'ServiceTestModule', 'uiServiceModule']);
 
 angular.module('mgcrea.ngStrap.modal').run([ '$templateCache', function($templateCache) {
     $templateCache.put('webapp/template/confirm.modal.tpl.html', '<div class="modal" tabindex="-1" role="dialog"><div class="modal-dialog"><div class="modal-content"><div class="modal-header ng-hide" ng-show="title"><button type="button" class="close" ng-click="onCancel()">×</button><h4 class="modal-title ng-binding" ng-bind-html="title"></h4></div><div class="modal-body ng-binding" ng-bind-html="content"></div><div class="modal-footer"><button type="button" class="btn btn-default" ng-click="onCancel()">Close</button><button type="button" class="btn btn-primary" ng-click="onConfirm()" ng-bind="confirmMsg"></button></div></div></div></div>');

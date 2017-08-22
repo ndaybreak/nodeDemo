@@ -1,0 +1,15 @@
+<h3>UI Bootstrap</h3>
+
+force-ellipses="true"
+
+<ul uib-pagination   first-text="第一页" last-text="最后一页" boundary-links="true"
+    max-size="5"  items-per-page="30" ng-change="pageChanged()" rotate="false"
+    total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()"></ul>
+
+    <uib-pagination ng-change="pageChanged()" ng-model="currentPage"
+                    items-per-page="pageSize" total-items="totalItems"  first-text="页首" last-text="页尾"
+                    previous-text="&lsaquo;" next-text="&rsaquo;"
+        max-size="5" class="pagination-sm" boundary-links="true" rotate="false"></uib-pagination>
+
+
+
