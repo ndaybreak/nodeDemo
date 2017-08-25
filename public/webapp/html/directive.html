@@ -3,11 +3,11 @@
 <!--<div>hello directive</div>-->
 <hello class="aaa" txt-title="AngularJS"></hello>
 
-<!--<div class="separator-line"></div>-->
+<div class="separator-line"></div>
 
-<!--<div>expander directive</div>  -->
-<!--<input type="text" ng-model="title"/>-->
-<!--<expander class="expander" expand-title="title"></expander>-->
+<div>expander directive</div>
+<input type="text" ng-model="title"/>
+<expander class="expander" expand-title="title"></expander>
 
 
 
@@ -17,45 +17,3 @@
         beautiful
     </beautiful>
 </hello>
-
-<div class="separator-line"></div>
-form
-<style type="text/css">
-    .my-form {
-        -webkit-transition: all linear 0.5s;
-        transition: all linear 0.5s;
-        background: transparent;
-    }
-    .my-form.ng-invalid {
-        background: red;
-    }
-</style>
-<!--<form name="myForm" class="my-form">-->
-    <!--userType: <input name="input" ng-model="userType" required>-->
-    <!--<span class="error" ng-show="myForm.input.$error.required">Required!</span><br>-->
-    <!--<span>userType = {{userType}}</span><br>-->
-    <!--<span>myForm.input.$valid = {{myForm.input.$valid}}</span><br>-->
-    <!--<span>myForm.input.$error = {{myForm.input.$error}}</span><br>-->
-    <!--<span>myForm.$valid = {{myForm.$valid}}</span><br>-->
-    <!--<span>myForm.$error.required = {{!!myForm.$error.required}}</span><br>-->
-<!--</form>-->
-
-<!--<div class="pica-pagination-wrap text-right">-->
-    <!--<uib-pagination ng-change="pageChangeCallback()" ng-model="currentPage"-->
-                    <!--items-per-page="pageSize" total-items="totalItems"  first-text="页首" last-text="页尾"-->
-                    <!--previous-text="&lsaquo;" next-text="&rsaquo;"-->
-                    <!--max-size="5" class="pagination-sm" boundary-links="true" rotate="false"></uib-pagination>-->
-
-    <!--<select class="form-control page-size" ng-model="pageSize" ng-change="pageChangeCallback()"-->
-            <!--ng-options="item for item in pageList" >-->
-    <!--</select>-->
-    <!--<span class="page-size-wrap">行/每页</span>-->
-    <!--<span class="total-items">-->
-        <!--总记录数: <span ng-bind="totalItems"></span>-->
-    <!--</span>-->
-<!--</div>-->
-
-<pica-pagination ng-change="pageChangeCallback()" ng-model="currentPage" items-per-page="pageSize" total-items="totalItems" page-list="pageList"></pica-pagination>
-
-
-<br><br><br>

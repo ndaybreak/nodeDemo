@@ -246,5 +246,3 @@ app.directive('picaPagination', function() {
 })
 
 
-
-console.log('uiDirective')

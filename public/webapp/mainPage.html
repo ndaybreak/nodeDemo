@@ -9,16 +9,48 @@
 
 </head>
 <body>
-<div class="container">
-	<nav class="menu">
-		<h3 style="border-bottom: 1px solid gray;">
-			<a href="#/dataBindTest">Data Binding</a>
-			<a href="#/directiveTest">Directive Demo</a>
-			<a href="#/scroll">Scroll Demo</a>
-			<a href="#/serviceTest">Service Demo</a>
-			<a href="#/angularStrap">Angular Strap</a>
-		</h3>
-	</nav>
+<header class="x-header" ng-controller="headerCtrl">
+
+		<!--<nav class="menu">-->
+			<!--<h3 style="border-bottom: 1px solid gray;">-->
+				<!--<a href="#/dataBindTest">Data Binding</a>-->
+				<!--<a href="#/directiveTest">Directive Demo</a>-->
+				<!--<a href="#/scroll">Scroll Demo</a>-->
+				<!--<a href="#/serviceTest">Service Demo</a>-->
+				<!--<a href="#/angularStrap">Angular Strap</a>-->
+			<!--</h3>-->
+		<!--</nav>-->
+		<nav class="navbar navbar-default" role="navigation" bs-navbar>
+			<div class="container">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#/">My Demo</a>
+				</div>
+				<ul class="nav navbar-nav">
+					<li uib-dropdown on-toggle="toggled(open)">
+						  <a uib-dropdown-toggle>Angular <span class="caret"></span></a>
+						  <ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="simple-dropdown">
+							<li ng-repeat="item in angularItems">
+							  <a ng-href="{{item.href}}">{{item.name}}</a>
+							</li>
+						  </ul>
+					</li>
+					<li uib-dropdown on-toggle="toggled(open)">
+						<a uib-dropdown-toggle>Directive Demo<span class="caret"></span></a>
+						<ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="simple-dropdown">
+							<li ng-repeat="item in directiveItems">
+								<a ng-href="{{item.href}}">{{item.name}}</a>
+							</li>
+						</ul>
+					</li>
+					<li><a href="#/angularStrap">Angular Strap</a></li>
+				</ul>
+				<div class="nav-right x-info">
+					<span class="info-item">xiao</span>
+				</div>
+			</div>
+		</nav>
+</header>
+<div class="container x-container">
 	<div ng-view></div>
 </div>
 
@@ -46,8 +78,11 @@
 <script src="js/ui/UIDirective.js"></script>
 
 <!--  -->
+<script src="js/controllers/mainController.js"></script>
 <script src="js/controllers/dataBindController.js"></script>
+<script src="js/controllers/validateController.js"></script>
 <script src="js/controllers/directiveController.js"></script>
+<script src="js/controllers/picaPaginationController.js"></script>
 <script src="js/controllers/scrollController.js"></script>
 <script src="js/controllers/serviceController.js"></script>
 <script src="js/controllers/angularStrapController.js"></script>

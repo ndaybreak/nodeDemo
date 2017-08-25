@@ -1,4 +1,5 @@
 function dataBindCtrl($scope, dataService, validate){
+
 	$scope.myName = 'xxxx';
 	
 	$scope.$watch('myName',function(newVal,oldVal){
@@ -28,4 +29,10 @@ function dataBindCtrl($scope, dataService, validate){
 	$scope.$watch('name', function(newVal, oldVal, scope) {
 		$scope.age = (newVal || 0) + 10
 	})
+
+    $scope.submitForm = function(isValid) {
+        if (!isValid) {
+            alert('验证失败');
+        }
+    };
 }

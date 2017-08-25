@@ -13,9 +13,15 @@ app.config([ '$routeProvider', function($routeProvider) {
 		.when('/dataBindTest', {
 				templateUrl : 'html/dataBind.html',
 				controller : dataBindCtrl})
+		.when('/validate', {
+				templateUrl : 'html/validate.html',
+				controller : validateCtrl})
 		.when('/directiveTest', {
 			templateUrl : 'html/directive.html',
 			controller : directiveCtrl})
+		.when('/picaPagination', {
+			templateUrl : 'html/picaPagination.html',
+			controller : picaPaginationCtrl})
 		.when('/scroll', {
 			templateUrl : 'html/scroll.html',
 			controller : scrollCtrl})
