@@ -28,4 +28,11 @@ app.controller('headerCtrl', function($scope){
             href: '#/picaPagination'
         }
     ]
+
+    $scope.otherItems = [
+        {
+            name: 'pdf demo',
+            href: '#/pdf'
+        }
+    ]
 })

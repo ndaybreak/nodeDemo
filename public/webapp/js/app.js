@@ -28,6 +28,9 @@ app.config([ '$routeProvider', function($routeProvider) {
 		.when('/serviceTest', {
 			templateUrl : 'html/service.html',
 			controller : ["$scope", "factory", "service", "provider", serviceCtrl]})
+		.when('/pdf', {
+			templateUrl : 'html/pdf.html',
+			controller : pdfCtrl})
 		.when('/angularStrap', {
 			templateUrl : 'html/angularStrap.html',
 			controller : angularStrapCtrl})

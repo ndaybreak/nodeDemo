@@ -72,6 +72,12 @@ app.get('/radical', function(req, res){
     res.send('What a radical visit! And the session expired time is: ' + req.session.cookie.maxAge);
 });
 
+app.get('/File/download_resource/*', function(req, res){
+    console.log('*********************************************************************************')
+    console.log(req.url)
+    res.send('What a radical visit! And the session expired time is: ');
+});
+
 
 
 

@@ -43,6 +43,14 @@
 						</ul>
 					</li>
 					<li><a href="#/angularStrap">Angular Strap</a></li>
+					<li uib-dropdown on-toggle="toggled(open)">
+						<a uib-dropdown-toggle>Others<span class="caret"></span></a>
+						<ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="simple-dropdown">
+							<li ng-repeat="item in otherItems">
+								<a ng-href="{{item.href}}">{{item.name}}</a>
+							</li>
+						</ul>
+					</li>
 				</ul>
 				<div class="nav-right x-info">
 					<span class="info-item">xiao</span>
